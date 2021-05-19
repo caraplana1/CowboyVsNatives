@@ -3,6 +3,8 @@ using System;
 
 public class PlayerController : Sprite
 {
+
+    #region Field Declaration.
     // Movement
     private Area2D area;
     private Vector2 direction;
@@ -11,7 +13,9 @@ public class PlayerController : Sprite
 
     private AnimationPlayer animationPlayer;
     private Rect2 viewport;
+    [Export]private Sprite Bullet;
 
+    #endregion
 
     public override void _Ready()
     {

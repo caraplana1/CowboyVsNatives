@@ -25,20 +25,18 @@ tracks/0/keys = {
 }
 
 [node name="Player" type="Sprite"]
-position = Vector2( 485.617, 291.2 )
+position = Vector2( 510.05, 342.702 )
 scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 1 )
-hframes = 3
+hframes = 7
 script = ExtResource( 2 )
 speed = 200.0
 
 [node name="Area2D" type="Area2D" parent="."]
-position = Vector2( -647.489, -388.267 )
 scale = Vector2( 1.33333, 1.33333 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 visible = false
-position = Vector2( 2.33331, 0 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
