@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Art/CowboySprite.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/PlayerController.cs" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 42.5107, 79.9333 )
+
+[node name="Player" type="Sprite"]
+position = Vector2( 485.617, 291.2 )
+scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+speed = 200.0
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( -647.489, -388.267 )
+scale = Vector2( 1.33333, 1.33333 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+position = Vector2( 2.33331, 0 )
+shape = SubResource( 1 )
