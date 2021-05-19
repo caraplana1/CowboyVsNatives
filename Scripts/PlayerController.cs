@@ -9,21 +9,43 @@ public class PlayerController : Sprite
     [Export]private float speed;
 
 
+    private AnimationPlayer animationPlayer;
     private Rect2 viewport;
 
-    // Called when the node enters the scene tree for the first time.
+
     public override void _Ready()
     {
-      area = GetChild<Area2D>(0);
       viewport = GetViewportRect();
+      area = GetChild<Area2D>(0);
+      animationPlayer = GetChild<AnimationPlayer>(1);
     }
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-  public override void _Process(float delta)
-  {
-      #region Input Getter
 
-      direction = Vector2.Zero;
+    public override void _Process(float delta)
+    {
+        InputManage();
+  
+        Translate(direction * speed * delta);
+
+        Animation();          
+    }
+
+  void Animation()
+  {
+    if (direction != Vector2.Zero)
+      {
+        animationPlayer.Play("Walk");
+      }
+      else
+      {
+        animationPlayer.Stop(true);
+        Frame = 0;
+      }
+  }
+
+  void InputManage()
+  {
+    direction = Vector2.Zero;
 
       if (Input.IsActionPressed("move_up") && Position.y > 0)
       {
@@ -43,10 +65,6 @@ public class PlayerController : Sprite
       }
 
       direction = direction.Normalized();
-      #endregion
-  
-      Translate(direction * speed * delta);
-            
   }
 
 }
