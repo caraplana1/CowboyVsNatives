@@ -7,14 +7,14 @@ public class Bullet : Sprite
 
     public override void _Process(float delta)
     {
-        Translate(Vector2.Down * speed * delta);
+        Translate(Vector2.Up * speed * delta);
     }
 
     private void OnArea2DEntered(Area2D area)
     {
-        if (area.Name != "Player")
+        if (area.GetParent().Name != "Bullet" && area.GetParent().Name != "Player")
         {
-            this.Hide();
+            Visible = false;
         }
     }
 }

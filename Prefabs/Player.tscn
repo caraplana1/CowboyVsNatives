@@ -4,7 +4,7 @@
 [ext_resource path="res://Scripts/PlayerController.cs" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 42.5107, 79.9333 )
+extents = Vector2( 43.4771, 76.3381 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "Walk"
@@ -25,32 +25,36 @@ tracks/0/keys = {
 }
 
 [node name="Player" type="Sprite"]
-position = Vector2( 468.617, 288.814 )
 scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 1 )
 hframes = 7
 script = ExtResource( 2 )
 speed = 200.0
-amountBullets = 10
 
 [node name="Area2D" type="Area2D" parent="."]
-scale = Vector2( 1.33333, 1.33333 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-visible = false
+position = Vector2( 2, 0 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Walk = SubResource( 2 )
 
 [node name="North" type="Position2D" parent="."]
-position = Vector2( 18, -98 )
+position = Vector2( 18, -100 )
 
 [node name="South" type="Position2D" parent="."]
-position = Vector2( 14, 80 )
+position = Vector2( 14, 90 )
 
 [node name="Weast" type="Position2D" parent="."]
-position = Vector2( -86, 6 )
+position = Vector2( -90, 6 )
 
 [node name="East" type="Position2D" parent="."]
 position = Vector2( 88, 12 )
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="ShootTimer" to="." method="ReadyToShoot"]
