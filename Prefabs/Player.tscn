@@ -25,12 +25,13 @@ tracks/0/keys = {
 }
 
 [node name="Player" type="Sprite"]
-position = Vector2( 510.05, 342.702 )
+position = Vector2( 468.617, 288.814 )
 scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 1 )
 hframes = 7
 script = ExtResource( 2 )
 speed = 200.0
+amountBullets = 10
 
 [node name="Area2D" type="Area2D" parent="."]
 scale = Vector2( 1.33333, 1.33333 )
@@ -41,3 +42,15 @@ shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Walk = SubResource( 2 )
+
+[node name="North" type="Position2D" parent="."]
+position = Vector2( 18, -98 )
+
+[node name="South" type="Position2D" parent="."]
+position = Vector2( 14, 80 )
+
+[node name="Weast" type="Position2D" parent="."]
+position = Vector2( -86, 6 )
+
+[node name="East" type="Position2D" parent="."]
+position = Vector2( 88, 12 )
