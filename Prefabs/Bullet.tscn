@@ -7,11 +7,11 @@
 radius = 39.3533
 
 [node name="Bullet" type="Sprite"]
-scale = Vector2( 0.15, 0.15 )
+scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -40 )
 script = ExtResource( 2 )
-speed = 200.0
+speed = 300.0
 
 [node name="Area2D" type="Area2D" parent="."]
 

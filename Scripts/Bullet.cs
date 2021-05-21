@@ -7,7 +7,7 @@ public class Bullet : Sprite
 
     public override void _Process(float delta)
     {
-        Translate(Vector2.Up * speed * delta);
+        Translate(Vector2.Up.Rotated(Rotation) * speed * delta);
     }
 
     private void OnArea2DEntered(Area2D area)
@@ -17,4 +17,5 @@ public class Bullet : Sprite
             Visible = false;
         }
     }
+
 }

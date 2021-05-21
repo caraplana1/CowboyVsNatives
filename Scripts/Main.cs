@@ -23,7 +23,6 @@ public class Main : Node
         {
             bullet[i] = (Sprite)bulletScene.Instance();
             AddChild(bullet[i]);
-            // bullet[i].Position = new Vector2(50, 50);
             bullet[i].Visible = false;
         }
 
@@ -32,8 +31,8 @@ public class Main : Node
 
     private void OnShootingBullet(Vector2 position,float rotation)
     {
-        GD.Print(position);
-        bullet[bulletCounter].Position = position.Rotated(rotation);
+        bullet[bulletCounter].Position = position;
+        bullet[bulletCounter].Rotation = rotation;
         bullet[bulletCounter].Visible = true;
 
         if (bulletCounter >= amountBullets - 1)

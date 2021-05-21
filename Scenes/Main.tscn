@@ -8,4 +8,4 @@ script = ExtResource( 2 )
 amountBullets = 15
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 516.333, 303.065 )
+position = Vector2( 512, 300 )
