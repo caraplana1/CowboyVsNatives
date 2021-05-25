@@ -10,12 +10,9 @@ public class Bullet : Sprite
         Translate(Vector2.Up.Rotated(Rotation) * speed * delta);
     }
 
-    private void OnArea2DEntered(Area2D area)
+    private void OnBody2DEntered()
     {
-        if (area.GetParent().Name != "Bullet" && area.GetParent().Name != "Player")
-        {
-            Visible = false;
-        }
+        Visible = !Visible;
     }
 
 }

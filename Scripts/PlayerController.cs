@@ -13,7 +13,6 @@ public class PlayerController : Sprite
 	private Rect2 viewport;
 
 	// Children
-	private Area2D area;
 	private AnimationPlayer animationPlayer;
 	private Position2D[] pistolPosition;
 
@@ -28,7 +27,6 @@ public class PlayerController : Sprite
 	  // Getting Children.
 	  pistolPosition = new Position2D[4];
 	  viewport = GetViewportRect();
-	  area = GetChild<Area2D>(0);
 	  animationPlayer = GetChild<AnimationPlayer>(1);
 	  for (int i = 0; i < 4; i++)
 	  {
@@ -67,19 +65,19 @@ public class PlayerController : Sprite
 	{
 		direction = Vector2.Zero;
 
-		if (Input.IsActionPressed("move_up") && Position.y > 0)
+		if (Input.IsActionPressed("move_up") && Position.y > 20)
 		{
 			direction.y -= 1;
 		}
-		if (Input.IsActionPressed("move_down") && Position.y < viewport.Size.y)
+		if (Input.IsActionPressed("move_down") && Position.y < viewport.Size.y - 20)
 		{
 			direction.y += 1;
 		}
-		if (Input.IsActionPressed("move_left") && Position.x > 0)
+		if (Input.IsActionPressed("move_left") && Position.x > 20)
 		{
 			direction.x -= 1;
 		}
-		if (Input.IsActionPressed("move_right") && Position.x < viewport.Size.x)
+		if (Input.IsActionPressed("move_right") && Position.x < viewport.Size.x - 20)
 		{
 			direction.x += 1;
 		}
@@ -95,19 +93,19 @@ public class PlayerController : Sprite
 			Frame = 4;
 			EmitSignal("Shooting", pistolPosition[0].GlobalPosition, 0);
 		}
-		if (Input.IsActionPressed("fire_down") && readyToShoot)
+		else if (Input.IsActionPressed("fire_down") && readyToShoot)
 		{
             readyToShoot = false;
 			Frame = 3;
 			EmitSignal("Shooting", pistolPosition[1].GlobalPosition, 180 * phi);
 		}
-		if (Input.IsActionPressed("fire_left") && readyToShoot)
+		else if (Input.IsActionPressed("fire_left") && readyToShoot)
 		{
             readyToShoot = false;
 			Frame = 6;
 			EmitSignal("Shooting", pistolPosition[2].GlobalPosition, -90 * phi);
 		}
-		if (Input.IsActionPressed("fire_right") && readyToShoot)
+		else if (Input.IsActionPressed("fire_right") && readyToShoot)
 		{
             readyToShoot = false;
 			Frame = 5;
