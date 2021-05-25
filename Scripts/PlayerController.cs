@@ -1,20 +1,22 @@
 using Godot;
 using System;
 
-public class PlayerController : Sprite
+public class PlayerController : RigidBody2D
 {
 
 	#region Field Declaration.
 
 	// Movement
 	private Vector2 direction;
-	[Export]private float speed;
+	[Export]private float speed = 3;
+
 
 	private Rect2 viewport;
 
 	// Children
 	private AnimationPlayer animationPlayer;
 	private Position2D[] pistolPosition;
+	private Sprite sprite;
 
 	private bool readyToShoot;
 	[Signal] private delegate void Shooting(Vector2 position, float degrees);
@@ -27,6 +29,7 @@ public class PlayerController : Sprite
 	  // Getting Children.
 	  pistolPosition = new Position2D[4];
 	  viewport = GetViewportRect();
+	  sprite = GetChild<Sprite>(0);
 	  animationPlayer = GetChild<AnimationPlayer>(1);
 	  for (int i = 0; i < 4; i++)
 	  {
@@ -37,12 +40,15 @@ public class PlayerController : Sprite
 	public override void _Process(float delta)
 	{
 		InputManage();
-  
-		Translate(direction * speed * delta);
 
 		Animation();
 
 		FireInput();          
+	}
+
+	public override void _PhysicsProcess(float delta)
+	{	
+		LinearVelocity = direction * speed;
 	}
 
 	void Animation()
@@ -56,7 +62,7 @@ public class PlayerController : Sprite
 			else
 			{
 				animationPlayer.Stop(true);
-				Frame = 0;
+				sprite.Frame = 0;
 			}
 		}
 	}
@@ -89,34 +95,34 @@ public class PlayerController : Sprite
 	{
 		if (Input.IsActionPressed("fire_up") && readyToShoot)
 		{
-            readyToShoot = false;
-			Frame = 4;
+			readyToShoot = false;
+			sprite.Frame = 4;
 			EmitSignal("Shooting", pistolPosition[0].GlobalPosition, 0);
 		}
 		else if (Input.IsActionPressed("fire_down") && readyToShoot)
 		{
-            readyToShoot = false;
-			Frame = 3;
+			readyToShoot = false;
+			sprite.Frame = 3;
 			EmitSignal("Shooting", pistolPosition[1].GlobalPosition, 180 * phi);
 		}
 		else if (Input.IsActionPressed("fire_left") && readyToShoot)
 		{
-            readyToShoot = false;
-			Frame = 6;
+			readyToShoot = false;
+			sprite.Frame = 6;
 			EmitSignal("Shooting", pistolPosition[2].GlobalPosition, -90 * phi);
 		}
 		else if (Input.IsActionPressed("fire_right") && readyToShoot)
 		{
-            readyToShoot = false;
-			Frame = 5;
+			readyToShoot = false;
+			sprite.Frame = 5;
 			EmitSignal("Shooting", pistolPosition[3].GlobalPosition, 90 * phi);
 		}
 	}
 
-    void ReadyToShoot()
-    {
-        GetChild<Timer>(6).Start();
-        readyToShoot = true;
-    }
+	void ReadyToShoot()
+	{
+		GetChild<Timer>(6).Start();
+		readyToShoot = true;
+	}
 
 }

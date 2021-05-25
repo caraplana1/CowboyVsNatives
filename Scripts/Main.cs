@@ -7,7 +7,7 @@ public class Main : Node
 
     // Bullets.
     [Export]private PackedScene bulletScene;
-    private Sprite[] bullet;
+    private RigidBody2D[] bullet;
     [Export]private int amountBullets = 11; 
     private int bulletCounter;
 
@@ -16,13 +16,12 @@ public class Main : Node
     public override void _Ready()
     {
         // Bullets Creation;
-        bullet = new Sprite[amountBullets];
+        bullet = new RigidBody2D[amountBullets];
         bulletCounter = 0;
         for (int i = 0; i < amountBullets; i++)
         {
-            bullet[i] = (Sprite)bulletScene.Instance();
+            bullet[i] = (RigidBody2D)bulletScene.Instance();
             AddChild(bullet[i]);
-            bullet[i].Position = new Vector2(50,50);
             bullet[i].Visible = false;
         }
 

@@ -12,8 +12,7 @@ config_version=4
 
 config/name="Cowboy Vs Natives"
 run/main_scene="res://Scenes/Main.tscn"
-config/icon="res://Art/icon.png"
-config/windows_native_icon="res://Art/icon.ico"
+config/icon="res://icon.png"
 
 [display]
 
