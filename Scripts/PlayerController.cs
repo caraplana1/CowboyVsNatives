@@ -20,7 +20,7 @@ public class PlayerController : RigidBody2D
 
 	private bool readyToShoot;
 	[Signal] private delegate void Shooting(Vector2 position, float degrees);
-	private const float phi = (float)Math.PI / 180;
+	private const float phi = (float) Math.PI / 180;
 
 	#endregion
 
@@ -31,6 +31,7 @@ public class PlayerController : RigidBody2D
 	  viewport = GetViewportRect();
 	  sprite = GetChild<Sprite>(0);
 	  animationPlayer = GetChild<AnimationPlayer>(1);
+
 	  for (int i = 0; i < 4; i++)
 	  {
 		pistolPosition[i] = GetChild<Position2D>(i+2);

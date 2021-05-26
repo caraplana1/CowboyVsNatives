@@ -3,11 +3,10 @@
 [ext_resource path="res://Art/Cowboy-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/PlayerController.cs" type="Script" id=2]
 
-[sub_resource type="PhysicsMaterial" id=3]
+[sub_resource type="PhysicsMaterial" id=4]
 rough = true
 
-[sub_resource type="Animation" id=1]
-resource_name = "Walk"
+[sub_resource type="Animation" id=5]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -23,12 +22,12 @@ tracks/0/keys = {
 "values": [ 1, 2 ]
 }
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 32.1136, 59.5391 )
 
 [node name="Player" type="RigidBody2D"]
 mode = 2
-physics_material_override = SubResource( 3 )
+physics_material_override = SubResource( 4 )
 gravity_scale = 0.0
 script = ExtResource( 2 )
 speed = 200.0
@@ -42,28 +41,32 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Walk = SubResource( 1 )
+anims/Walk = SubResource( 5 )
 __meta__ = {
 "_editor_description_": ""
 }
 
 [node name="North" type="Position2D" parent="."]
+visible = false
 position = Vector2( 0, -80 )
 __meta__ = {
 "_editor_description_": ""
 }
 
 [node name="South" type="Position2D" parent="."]
-position = Vector2( 0, 90 )
+visible = false
+position = Vector2( 0, 70 )
 __meta__ = {
 "_editor_description_": ""
 }
 
 [node name="Weast" type="Position2D" parent="."]
-position = Vector2( -90, 6 )
+visible = false
+position = Vector2( -75, 6 )
 
 [node name="East" type="Position2D" parent="."]
-position = Vector2( 80, 10 )
+visible = false
+position = Vector2( 80, 8 )
 
 [node name="ShootTimer" type="Timer" parent="."]
 wait_time = 0.275
@@ -71,7 +74,8 @@ one_shot = true
 autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 1.87288, -1.76777 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [connection signal="timeout" from="ShootTimer" to="." method="ReadyToShoot"]

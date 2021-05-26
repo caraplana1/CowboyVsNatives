@@ -1,17 +1,33 @@
 using Godot;
 using System;
 
-public class Bullet : RigidBody2D
+public class Bullet : Area2D
 {
-	[Export]private float speed;
+	// Speed is set in the editor and aux is the valu that multiply the vector
+	// aux is a copy of speed but change, speed doesn't
 
-	public override void _PhysicsProcess(float delta)
+	[Export]private float speed;
+	private float aux;
+
+	public override void _Ready()
 	{
-		LinearVelocity = Vector2.Up.Rotated(Rotation) * speed;
+		aux = speed;
+	}
+
+	public override void _Process(float delta)
+	{
+		Translate(Vector2.Up.Rotated(Rotation) * aux * delta);
 	}
 
 	private void OnBodyEntered(Node body)
 	{
 		Visible = false;
+		aux = 0;
 	}
+
+	public void RestoreSpeed()
+	{
+		aux = speed;
+	}
+
 }

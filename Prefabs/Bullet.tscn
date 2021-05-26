@@ -1,21 +1,23 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Scripts/Bullet.cs" type="Script" id=1]
-[ext_resource path="res://Art/Bullet.png" type="Texture" id=2]
+[ext_resource path="res://Art/Bullet.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Bullet.cs" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 3.8096
+radius = 3.73399
 
-[node name="Bullet" type="RigidBody2D"]
-gravity_scale = 0.0
-contacts_reported = 1
-contact_monitor = true
-script = ExtResource( 1 )
-speed = 300.0
+[node name="Bullet" type="Area2D"]
+script = ExtResource( 2 )
+speed = 200.0
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0.0136719, 3.56929 )
 scale = Vector2( 0.1, 0.1 )
-texture = ExtResource( 2 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, -35 )
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

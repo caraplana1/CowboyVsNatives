@@ -7,7 +7,7 @@ public class Main : Node
 
     // Bullets.
     [Export]private PackedScene bulletScene;
-    private RigidBody2D[] bullet;
+    private Bullet[] bullet;
     [Export]private int amountBullets = 11; 
     private int bulletCounter;
 
@@ -16,11 +16,11 @@ public class Main : Node
     public override void _Ready()
     {
         // Bullets Creation;
-        bullet = new RigidBody2D[amountBullets];
+        bullet = new Bullet[amountBullets];
         bulletCounter = 0;
         for (int i = 0; i < amountBullets; i++)
         {
-            bullet[i] = (RigidBody2D)bulletScene.Instance();
+            bullet[i] = (Bullet)bulletScene.Instance();
             AddChild(bullet[i]);
             bullet[i].Visible = false;
         }
@@ -28,8 +28,9 @@ public class Main : Node
         GetChild(1).Connect("Shooting", this, "OnShootingBullet");
     }
 
-    private void OnShootingBullet(Vector2 position,float rotation)
+    private void OnShootingBullet(Vector2 position, float rotation)
     {
+        bullet[bulletCounter].RestoreSpeed();
         bullet[bulletCounter].Position = position;
         bullet[bulletCounter].Rotation = rotation;
         bullet[bulletCounter].Visible = true;
