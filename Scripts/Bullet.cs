@@ -21,8 +21,8 @@ public class Bullet : Area2D
 
 	private void OnBodyEntered(Node body)
 	{
-		Visible = false;
 		aux = 0;
+		Visible = false;
 	}
 
 	public void RestoreSpeed()

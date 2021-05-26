@@ -8,7 +8,7 @@ public class Main : Node
     // Bullets.
     [Export]private PackedScene bulletScene;
     private Bullet[] bullet;
-    [Export]private int amountBullets = 11; 
+    [Export]private int amountBullets = 12; 
     private int bulletCounter;
 
     #endregion

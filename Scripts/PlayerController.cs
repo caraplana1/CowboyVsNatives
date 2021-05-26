@@ -49,7 +49,7 @@ public class PlayerController : RigidBody2D
 
 	public override void _PhysicsProcess(float delta)
 	{	
-		LinearVelocity = direction * speed;
+		ApplyCentralImpulse(direction * speed);
 	}
 
 	void Animation()
@@ -72,19 +72,19 @@ public class PlayerController : RigidBody2D
 	{
 		direction = Vector2.Zero;
 
-		if (Input.IsActionPressed("move_up") && Position.y > 20)
+		if (Input.IsActionPressed("move_up") && Position.y > 80)
 		{
 			direction.y -= 1;
 		}
-		if (Input.IsActionPressed("move_down") && Position.y < viewport.Size.y - 20)
+		if (Input.IsActionPressed("move_down") && Position.y < viewport.Size.y - 80)
 		{
 			direction.y += 1;
 		}
-		if (Input.IsActionPressed("move_left") && Position.x > 20)
+		if (Input.IsActionPressed("move_left") && Position.x > 80)
 		{
 			direction.x -= 1;
 		}
-		if (Input.IsActionPressed("move_right") && Position.x < viewport.Size.x - 20)
+		if (Input.IsActionPressed("move_right") && Position.x < viewport.Size.x - 80)
 		{
 			direction.x += 1;
 		}
