@@ -17,9 +17,12 @@ public class PlayerController : RigidBody2D
 	private AnimationPlayer animationPlayer;
 	private Position2D[] pistolPosition;
 	private Sprite sprite;
+	private Timer ShootTimer;
 
 	private bool readyToShoot;
 	[Signal] private delegate void Shooting(Vector2 position, float degrees);
+	[Signal] private delegate void SharePosition(Vector2 _position);
+
 	private const float phi = (float) Math.PI / 180;
 
 	#endregion
@@ -31,6 +34,7 @@ public class PlayerController : RigidBody2D
 	  viewport = GetViewportRect();
 	  sprite = GetChild<Sprite>(0);
 	  animationPlayer = GetChild<AnimationPlayer>(1);
+	  ShootTimer = GetChild<Timer>(6);
 
 	  for (int i = 0; i < 4; i++)
 	  {
@@ -51,6 +55,8 @@ public class PlayerController : RigidBody2D
 	{	
 		ApplyCentralImpulse(direction * speed);
 	}
+
+	#region Methods
 
 	void Animation()
 	{
@@ -96,34 +102,49 @@ public class PlayerController : RigidBody2D
 	{
 		if (Input.IsActionPressed("fire_up") && readyToShoot)
 		{
-			readyToShoot = false;
-			sprite.Frame = 4;
-			EmitSignal("Shooting", pistolPosition[0].GlobalPosition, 0);
+
+			Shoot(pistolPosition[0].GlobalPosition, 0, 4);
+
 		}
 		else if (Input.IsActionPressed("fire_down") && readyToShoot)
 		{
-			readyToShoot = false;
-			sprite.Frame = 3;
-			EmitSignal("Shooting", pistolPosition[1].GlobalPosition, 180 * phi);
+
+			Shoot(pistolPosition[1].GlobalPosition, 180 * phi, 3);
+
 		}
 		else if (Input.IsActionPressed("fire_left") && readyToShoot)
 		{
-			readyToShoot = false;
-			sprite.Frame = 6;
-			EmitSignal("Shooting", pistolPosition[2].GlobalPosition, -90 * phi);
+
+			Shoot(pistolPosition[2].GlobalPosition, -90 * phi, 6);
+
 		}
 		else if (Input.IsActionPressed("fire_right") && readyToShoot)
 		{
-			readyToShoot = false;
-			sprite.Frame = 5;
-			EmitSignal("Shooting", pistolPosition[3].GlobalPosition, 90 * phi);
+
+			Shoot(pistolPosition[3].GlobalPosition, 90 * phi, 5);
+
 		}
+	}
+
+	void Shoot(Vector2 _position, float angle, int frame)
+	{
+		// Funtion to set the correct frame, start the timer to shoot and emmit the signal.
+		sprite.Frame = frame;
+
+		readyToShoot = false;
+		ShootTimer.Start();
+		EmitSignal("Shooting", _position, angle);
 	}
 
 	void ReadyToShoot()
 	{
-		GetChild<Timer>(6).Start();
 		readyToShoot = true;
 	}
 
+	void OnEmitPosition()
+	{
+		EmitSignal("SharePosition", GlobalPosition);
+	}
+
+	#endregion
 }
