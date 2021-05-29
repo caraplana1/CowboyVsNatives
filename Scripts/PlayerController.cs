@@ -141,7 +141,7 @@ public class PlayerController : RigidBody2D
 		readyToShoot = true;
 	}
 
-	void OnEmitPosition()
+	void OnEmitPositionTimer()
 	{
 		EmitSignal("SharePosition", GlobalPosition);
 	}

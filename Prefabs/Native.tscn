@@ -28,7 +28,11 @@ tracks/0/keys = {
 ]]
 mode = 2
 gravity_scale = 0.0
+contacts_reported = 1
+contact_monitor = true
+angular_damp = 20.0
 script = ExtResource( 2 )
+speed = 80.0
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.75, 0.75 )
@@ -36,10 +40,7 @@ texture = ExtResource( 1 )
 hframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Walking = SubResource( 2 )
-
-[node name="Line2D" type="Line2D" parent="."]

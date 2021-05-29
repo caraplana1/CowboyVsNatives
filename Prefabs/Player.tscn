@@ -83,4 +83,4 @@ wait_time = 0.5
 autostart = true
 
 [connection signal="timeout" from="ShootTimer" to="." method="ReadyToShoot"]
-[connection signal="timeout" from="EmitPosition" to="." method="OnEmitPosition"]
+[connection signal="timeout" from="EmitPosition" to="." method="OnEmitPositionTimer"]
