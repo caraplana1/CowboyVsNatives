@@ -31,6 +31,7 @@ public class Bullet : Area2D
 
 		if (body.IsInGroup("Enemy"))
 		{
+			GD.Print("NativeKilled");
 			EmitSignal("NativeKilled");
 		}
 	}

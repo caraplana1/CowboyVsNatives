@@ -4,57 +4,64 @@ using System;
 public class MobSpawner : Node
 {
     #region Field Declaration
-
-    // Enemys
-    [Export]private PackedScene enemyScene;
-    private Native[] enemy;
-    [Export]private int amountEnemy = 0;
-    private int enemyCounter;
-
-    private Position2D[] spawnPositions;
+    // Children.
+    private Position2D[] spawnPoints;
     private Timer spawnTimer;
-    
-    private RandomNumberGenerator indx;
+
+
+    // Enemy.
+    [Export] private PackedScene enemyScene;
+    private Native[] enemy;
+    [Export] private int amountEnemys;
+    private int enemycounter;
+    private Navigation2D map;
 
     #endregion
 
     public override void _Ready()
     {
-        //indx.Randomize();
+        // Brothers
+        PlayerController player = GetParent().GetChild<PlayerController>(1);
+        map = GetParent().GetChild<Navigation2D>(0);
 
-        // Enemy Creation.
-        enemy = new Native[amountEnemy];
-        spawnPositions = new Position2D[4];
-        enemyCounter = 0;
+        // Children
+        spawnPoints = new Position2D[4];
+        for (int i = 0; i < 4; i ++)
+        {
+            spawnPoints[i] = GetChild<Position2D>(i);
+        }
+        spawnTimer = GetChild<Timer>(4);
 
-        for (int i = 0; i < amountEnemy; i ++)
+
+        // Enemy Creation & config.
+        enemy = new Native[amountEnemys];
+        enemycounter = 0;
+
+        for (int i = 0; i < amountEnemys; i ++)
         {
             enemy[i] = enemyScene.Instance<Native>();
             AddChild(enemy[i]);
             enemy[i].SetActivation(false);
+            enemy[i].GlobalPosition = spawnPoints[0].GlobalPosition;
         }
 
-        // Getting Children.
-        for (int j = 0; j < 4 ; j++)
+        player.Connect("SharePosition", this, "OnGettingTarget");
+        enemy[0].SetActivation(true);
+    }
+
+    void OnGettingTarget(Vector2 playerPosition)
+    {
+        for (int i = 0; i < amountEnemys; i ++)
         {
-            spawnPositions[j] = GetChild<Position2D>(j);
+            if (enemy[i].IsActive())
+            {
+                enemy[i].FollowPath(map.GetSimplePath(enemy[i].GlobalPosition, playerPosition));
+            }
         }
-
-        spawnTimer = GetChild<Timer>(4);
     }
 
     private void OnSpawnTimeOut()
     {
-        enemy[enemyCounter].GlobalPosition = spawnPositions[indx.RandiRange(0,3)].GlobalPosition;
-        enemy[enemyCounter].SetActivation(true);
 
-        if (enemyCounter == amountEnemy - 1)
-        {
-            enemyCounter = 0;
-        }
-        else
-        {
-            enemyCounter ++;
-        }
     }
 }

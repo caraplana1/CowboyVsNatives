@@ -1,18 +1,20 @@
 using Godot;
-using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public class Native : RigidBody2D
 {
     #region  Field Declaration
 
     [Export]private float speed;
+    private bool isActive;
 
     // Children
     private CollisionShape2D collision;
     
     // Navegation
     private Vector2[] path;
-    private Navigation2D map;
+    private Vector2 direction = Vector2.Zero;
 
     #endregion
 
@@ -22,38 +24,53 @@ public class Native : RigidBody2D
         collision = GetChild<CollisionShape2D>(1);
 
         SetPhysicsProcess(false);
-        GetParent().GetParent().GetChild(1).Connect("SharePosition", this, "OnChase");
-        map = GetParent().GetParent().GetChild<Navigation2D>(0);
     }
 
     public override void _PhysicsProcess(float delta)
     {
-        MoveAlongPath(speed);
+       ApplyCentralImpulse(direction * speed);
     }
 
-    private void MoveAlongPath(float enemySpeed)
+    public void FollowPath(Vector2[] pathToPlayer)
     {
-        Vector2 startPosition = GlobalPosition; 
-        float nextPoint;
+        GetNode<Line2D>("Line2D").Points = pathToPlayer;
+        /*
+        Vector2 startPosition;
+        List<Vector2> aux;
 
-
-        for (int i = 0; i < path.Length; i++)
+        path = pathToPlayer;
+        startPosition = GlobalPosition;
+        
+        for (int i = 0; i < path.Length; i ++)
         {
-            nextPoint = startPosition.DistanceTo(path[i]);
-        }
-    }
-
-    private void OnChase(Vector2 playerPosition)
-    {
-        path = map.GetSimplePath(this.GlobalPosition, playerPosition);
-        SetPhysicsProcess(true);
+            if (startPosition.DistanceTo(path[0]) < speed)
+            {
+                direction = path[0].Normalized();
+                GD.Print("Moving to " + direction);
+            }
+            else
+            {
+                startPosition = path[0];
+                aux = path.ToList<Vector2>();
+                aux.RemoveAt(0);
+                path = aux.ToArray<Vector2>();
+            }
+        } 
+        */
     }
 
     public void SetActivation(bool activationMode)
     {
         Visible = activationMode;
         collision.Disabled = !activationMode;
+        Sleeping = !activationMode;
         SetPhysicsProcess(activationMode);
+        isActive = activationMode;
+    }
+
+    public bool IsActive()
+    {
+        return isActive;
     }
 
 }

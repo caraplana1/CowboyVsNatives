@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Main.cs" type="Script" id=2]
 [ext_resource path="res://Prefabs/Bullet.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Resources/Desert.tres" type="TileSet" id=4]
 [ext_resource path="res://Scripts/MobSpawner.cs" type="Script" id=5]
+[ext_resource path="res://Prefabs/Native.tscn" type="PackedScene" id=6]
 
 [node name="Main" type="Node"]
 script = ExtResource( 2 )
@@ -24,23 +25,23 @@ tile_data = PoolIntArray( -196604, 0, 196608, -196603, 0, 196608, -196602, 0, 19
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 520, 360 )
 
-[node name="Mob Spawner" type="Node" parent="."]
+[node name="MobSpawner" type="Node" parent="."]
 script = ExtResource( 5 )
-amountEnemy = 15
+enemyScene = ExtResource( 6 )
+amountEnemys = 15
 
-[node name="Noth" type="Position2D" parent="Mob Spawner"]
+[node name="Noth" type="Position2D" parent="MobSpawner"]
 position = Vector2( 520, -40 )
 
-[node name="South" type="Position2D" parent="Mob Spawner"]
+[node name="South" type="Position2D" parent="MobSpawner"]
 position = Vector2( 520, 760 )
 
-[node name="East" type="Position2D" parent="Mob Spawner"]
+[node name="East" type="Position2D" parent="MobSpawner"]
 position = Vector2( 1080, 360 )
 
-[node name="Weast" type="Position2D" parent="Mob Spawner"]
+[node name="Weast" type="Position2D" parent="MobSpawner"]
 position = Vector2( -40, 360 )
 
-[node name="EnemySpawnTimer" type="Timer" parent="Mob Spawner"]
-autostart = true
+[node name="EnemySpawnTimer" type="Timer" parent="MobSpawner"]
 
-[connection signal="timeout" from="Mob Spawner/EnemySpawnTimer" to="Mob Spawner" method="OnSpawnTimeOut"]
+[connection signal="timeout" from="MobSpawner/EnemySpawnTimer" to="MobSpawner" method="OnSpawnTimeOut"]
