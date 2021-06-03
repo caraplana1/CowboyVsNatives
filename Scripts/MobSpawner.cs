@@ -43,21 +43,11 @@ public class MobSpawner : Node
             AddChild(enemy[i]);
             enemy[i].SetActivation(false);
             enemy[i].GlobalPosition = spawnPoints[0].GlobalPosition;
+            player.Connect("SharePosition", enemy[i], "OnChase");
         }
 
-        player.Connect("SharePosition", this, "OnGettingTarget");
         enemy[0].SetActivation(true);
-    }
-
-    void OnGettingTarget(Vector2 playerPosition)
-    {
-        for (int i = 0; i < amountEnemys; i ++)
-        {
-            if (enemy[i].IsActive())
-            {
-                enemy[i].FollowPath(map.GetSimplePath(enemy[i].GlobalPosition, playerPosition));
-            }
-        }
+        enemy[0].GlobalPosition = spawnPoints[3].GlobalPosition;
     }
 
     private void OnSpawnTimeOut()

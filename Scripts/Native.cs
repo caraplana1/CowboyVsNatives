@@ -10,10 +10,13 @@ public class Native : RigidBody2D
     private bool isActive;
 
     // Children
+    private Sprite sprite;
     private CollisionShape2D collision;
+    private AnimationPlayer animationPlayer;
     
-    // Navegation
+    // Navigation
     private Vector2[] path;
+    private Navigation2D map;
     private Vector2 direction = Vector2.Zero;
 
     #endregion
@@ -21,9 +24,22 @@ public class Native : RigidBody2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        // children
+        sprite = GetChild<Sprite>(0);
         collision = GetChild<CollisionShape2D>(1);
+        animationPlayer = GetChild<AnimationPlayer>(2);
+
+        map = GetParent().GetParent().GetChild<Navigation2D>(0);
 
         SetPhysicsProcess(false);
+    }
+
+    public override void _Process(float delta)
+    {
+        if (direction != Vector2.Zero)
+        {
+            animationPlayer.Play("Walking");
+        }
     }
 
     public override void _PhysicsProcess(float delta)
@@ -31,32 +47,20 @@ public class Native : RigidBody2D
        ApplyCentralImpulse(direction * speed);
     }
 
-    public void FollowPath(Vector2[] pathToPlayer)
-    {
-        GetNode<Line2D>("Line2D").Points = pathToPlayer;
-        /*
-        Vector2 startPosition;
-        List<Vector2> aux;
-
-        path = pathToPlayer;
-        startPosition = GlobalPosition;
-        
-        for (int i = 0; i < path.Length; i ++)
+    public void OnChase(Vector2 playerPosition)
+    {   
+        if (isActive)
         {
-            if (startPosition.DistanceTo(path[0]) < speed)
+            path = map.GetSimplePath(GlobalPosition, playerPosition);
+            
+            for (int i = 0; i < path.Length; i++)
             {
-                direction = path[0].Normalized();
-                GD.Print("Moving to " + direction);
+                path[i] -= GlobalPosition;
             }
-            else
-            {
-                startPosition = path[0];
-                aux = path.ToList<Vector2>();
-                aux.RemoveAt(0);
-                path = aux.ToArray<Vector2>();
-            }
-        } 
-        */
+
+            // GetNode<Line2D>("Line2D").Points = path; // Show the enemy path.
+            
+        }
     }
 
     public void SetActivation(bool activationMode)
@@ -66,11 +70,6 @@ public class Native : RigidBody2D
         Sleeping = !activationMode;
         SetPhysicsProcess(activationMode);
         isActive = activationMode;
-    }
-
-    public bool IsActive()
-    {
-        return isActive;
     }
 
 }
