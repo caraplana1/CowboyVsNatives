@@ -26,14 +26,14 @@ tracks/0/keys = {
 [node name="Native" type="RigidBody2D" groups=[
 "Enemy",
 ]]
-collision_layer = 2
 mode = 2
+mass = 0.00102041
 gravity_scale = 0.0
 contacts_reported = 1
 contact_monitor = true
 linear_damp = 20.0
 script = ExtResource( 2 )
-speed = 80.0
+speed = 1000.0
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.75, 0.75 )

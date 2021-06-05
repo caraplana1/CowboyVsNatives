@@ -17,7 +17,6 @@ public class Native : RigidBody2D
     // Navigation
     private Vector2[] path;
     private Navigation2D map;
-    private Vector2 direction = Vector2.Zero;
 
     #endregion
 
@@ -30,36 +29,59 @@ public class Native : RigidBody2D
         animationPlayer = GetChild<AnimationPlayer>(2);
 
         map = GetParent().GetParent().GetChild<Navigation2D>(0);
-
-        SetPhysicsProcess(false);
+        SetActivation(false);
     }
 
     public override void _Process(float delta)
     {
-        if (direction != Vector2.Zero)
+        if(path != null)
         {
-            animationPlayer.Play("Walking");
+            MoveAlongPath(speed * delta);
         }
     }
 
-    public override void _PhysicsProcess(float delta)
+
+    void MoveAlongPath(float distance)
     {
-       ApplyCentralImpulse(direction * speed);
+        Vector2 startPoint = Position;
+        float distanceToNextPoint;
+        List<Vector2> aux;
+
+        for (int i = 0; i < path.Length; i ++)
+        {
+            // GD.Print(path.Length);
+            distanceToNextPoint = startPoint.DistanceTo(path[0]);
+            if (distance <= distanceToNextPoint && distance >= 0)
+            {
+                Position = startPoint.LinearInterpolate(path[0], distance / distanceToNextPoint);
+            }
+            else if (distance < 0)
+            {
+                Position = path[0];
+            }
+
+            distance -= distanceToNextPoint;
+            startPoint = path[0];
+            aux = path.ToList<Vector2>();
+            aux.RemoveAt(0);
+            path = aux.ToArray<Vector2>();
+            // GD.Print(path.Length);
+        }
     }
 
-    public void OnChase(Vector2 playerPosition)
+    public void GetPlayerPosition(Vector2 playerPosition)
     {   
         if (isActive)
         {
+            // Gets the path and correct the with the current object.
             path = map.GetSimplePath(GlobalPosition, playerPosition);
-            
+            /*
             for (int i = 0; i < path.Length; i++)
             {
                 path[i] -= GlobalPosition;
             }
-
-            // GetNode<Line2D>("Line2D").Points = path; // Show the enemy path.
-            
+            GetNode<Line2D>("Line2D").Points = path; // Show the enemy path.
+            */
         }
     }
 
@@ -68,8 +90,16 @@ public class Native : RigidBody2D
         Visible = activationMode;
         collision.Disabled = !activationMode;
         Sleeping = !activationMode;
-        SetPhysicsProcess(activationMode);
+        SetProcess(activationMode);
         isActive = activationMode;
+        if (activationMode)
+        {
+            animationPlayer.Play("Walking");
+        }
+        else
+        {
+            animationPlayer.Stop(true);
+        }
     }
 
 }
