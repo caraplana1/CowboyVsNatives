@@ -4,6 +4,7 @@ using System;
 public class MobSpawner : Node
 {
     #region Field Declaration
+
     // Children.
     private Position2D[] spawnPoints;
     private Timer spawnTimer;
