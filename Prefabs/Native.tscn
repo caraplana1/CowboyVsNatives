@@ -26,14 +26,15 @@ tracks/0/keys = {
 [node name="Native" type="RigidBody2D" groups=[
 "Enemy",
 ]]
-mode = 2
+collision_layer = 2
+mode = 3
 mass = 0.00102041
 gravity_scale = 0.0
 contacts_reported = 1
 contact_monitor = true
 linear_damp = 20.0
 script = ExtResource( 2 )
-speed = 1000.0
+speed = 80.0
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.75, 0.75 )
@@ -45,5 +46,3 @@ shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Walking = SubResource( 2 )
-
-[node name="Line2D" type="Line2D" parent="."]

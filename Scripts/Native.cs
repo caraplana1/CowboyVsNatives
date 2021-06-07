@@ -47,25 +47,35 @@ public class Native : RigidBody2D
         float distanceToNextPoint;
         List<Vector2> aux;
 
-        for (int i = 0; i < path.Length; i ++)
+        while(distance > 0 && path.Length > 0)
         {
-            // GD.Print(path.Length);
             distanceToNextPoint = startPoint.DistanceTo(path[0]);
+
             if (distance <= distanceToNextPoint && distance >= 0)
             {
-                Position = startPoint.LinearInterpolate(path[0], distance / distanceToNextPoint);
+                Position += Position.DirectionTo(path[0]) * distance;
+                if (Position.DirectionTo(path[0]).x < 0)
+                {
+                    sprite.FlipH = true;
+                }
+                else
+                {
+                    sprite.FlipH = false;
+                }
             }
             else if (distance < 0)
             {
                 Position = path[0];
             }
+            else
+            {
+                startPoint = path[0];
+                aux = path.ToList<Vector2>();
+                aux.RemoveAt(0);
+                path = aux.ToArray<Vector2>();
+            }
 
             distance -= distanceToNextPoint;
-            startPoint = path[0];
-            aux = path.ToList<Vector2>();
-            aux.RemoveAt(0);
-            path = aux.ToArray<Vector2>();
-            // GD.Print(path.Length);
         }
     }
 
@@ -75,13 +85,6 @@ public class Native : RigidBody2D
         {
             // Gets the path and correct the with the current object.
             path = map.GetSimplePath(GlobalPosition, playerPosition);
-            /*
-            for (int i = 0; i < path.Length; i++)
-            {
-                path[i] -= GlobalPosition;
-            }
-            GetNode<Line2D>("Line2D").Points = path; // Show the enemy path.
-            */
         }
     }
 

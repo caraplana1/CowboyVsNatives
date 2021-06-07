@@ -19,8 +19,11 @@ public class PlayerController : RigidBody2D
 	private Sprite sprite;
 	private Timer ShootTimer;
 
+	// Shooting
 	private bool readyToShoot;
 	[Signal] private delegate void Shooting(Vector2 position, float degrees);
+
+	// Position share.
 	[Signal] private delegate void SharePosition(Vector2 _position);
 
 	private const float phi = (float) Math.PI / 180;
