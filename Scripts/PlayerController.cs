@@ -19,7 +19,6 @@ public class PlayerController : RigidBody2D
 	private Position2D[] pistolPosition;
 	private Sprite sprite;
 	private Timer ShootTimer;
-	private CollisionShape2D collider;
 
 	// Shooting
 	private bool readyToShoot;
@@ -42,7 +41,6 @@ public class PlayerController : RigidBody2D
 	  sprite = GetChild<Sprite>(0);
 	  animationPlayer = GetChild<AnimationPlayer>(1);
 	  ShootTimer = GetChild<Timer>(6);
-	  collider = GetChild<CollisionShape2D>(7);
 
 	  for (int i = 0; i < 4; i++)
 	  {
@@ -151,7 +149,7 @@ public class PlayerController : RigidBody2D
 		Visible = activationMode;
 		SetProcess(activationMode);
 		SetPhysicsProcess(activationMode);
-		collider.Disabled = !activationMode;
+		GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled", !activationMode);
 		isActive = activationMode;
 	}
 

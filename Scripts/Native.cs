@@ -11,7 +11,6 @@ public class Native : RigidBody2D
 
     // Children
     private Sprite sprite;
-    private CollisionShape2D collision;
     private AnimationPlayer animationPlayer;
     
     // Navigation
@@ -25,7 +24,6 @@ public class Native : RigidBody2D
     {
         // children
         sprite = GetChild<Sprite>(0);
-        collision = GetChild<CollisionShape2D>(1);
         animationPlayer = GetChild<AnimationPlayer>(2);
 
         map = GetParent().GetParent().GetChild<Navigation2D>(0);
@@ -92,10 +90,11 @@ public class Native : RigidBody2D
     public void SetActivation(bool activationMode)
     {
         Visible = activationMode;
-        collision.Disabled = !activationMode;
+        GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled", !activationMode);
         Sleeping = !activationMode;
         SetProcess(activationMode);
         isActive = activationMode;
+
         if (activationMode)
         {
             animationPlayer.Play("Walking");
