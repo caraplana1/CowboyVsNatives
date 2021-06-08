@@ -12,19 +12,23 @@ public class PlayerController : RigidBody2D
 
 
 	private Rect2 viewport;
+	private bool isActive;
 
 	// Children
 	private AnimationPlayer animationPlayer;
 	private Position2D[] pistolPosition;
 	private Sprite sprite;
 	private Timer ShootTimer;
+	private CollisionShape2D collider;
 
 	// Shooting
 	private bool readyToShoot;
 	[Signal] private delegate void Shooting(Vector2 position, float degrees);
 
-	// Position share.
+
 	[Signal] private delegate void SharePosition(Vector2 _position);
+
+	[Signal] private delegate void GameOver();
 
 	private const float phi = (float) Math.PI / 180;
 
@@ -38,11 +42,14 @@ public class PlayerController : RigidBody2D
 	  sprite = GetChild<Sprite>(0);
 	  animationPlayer = GetChild<AnimationPlayer>(1);
 	  ShootTimer = GetChild<Timer>(6);
+	  collider = GetChild<CollisionShape2D>(7);
 
 	  for (int i = 0; i < 4; i++)
 	  {
 		pistolPosition[i] = GetChild<Position2D>(i+2);
 	  }
+
+	  isActive = true;
 	}
 
 	public override void _Process(float delta)
@@ -139,6 +146,21 @@ public class PlayerController : RigidBody2D
 		EmitSignal("Shooting", _position, angle);
 	}
 
+	public void SetActive(bool activationMode)
+	{
+		Visible = activationMode;
+		SetProcess(activationMode);
+		SetPhysicsProcess(activationMode);
+		collider.Disabled = !activationMode;
+		isActive = activationMode;
+	}
+
+	public bool IsActive()
+	{
+		return isActive;
+	}
+
+	#region Signals Methods
 	void ReadyToShoot()
 	{
 		readyToShoot = true;
@@ -148,6 +170,22 @@ public class PlayerController : RigidBody2D
 	{
 		EmitSignal("SharePosition", GlobalPosition);
 	}
+
+	private void PlayerGameOver()
+	{
+		EmitSignal("GameOver");
+		SetActive(false);
+	}
+
+	void OnPlayerBodyEntered(Node body)
+	{
+		if (body.IsInGroup("Enemy"))
+		{
+			PlayerGameOver();
+		}
+	}
+
+	#endregion
 
 	#endregion
 }

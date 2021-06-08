@@ -46,11 +46,24 @@ public class MobSpawner : Node
             enemy[i].GlobalPosition = spawnPoints[0].GlobalPosition;
             player.Connect("SharePosition", enemy[i], "GetPlayerPosition");
         }
+
+        player.Connect("GameOver", this, "DisableEnemies");
     }
 
     private void OnSpawnTimeOut()
     {
         enemy[0].SetActivation(true);
         enemy[0].GlobalPosition = spawnPoints[0].GlobalPosition;
+    }
+
+    private void DisableEnemies()
+    {
+        for (int i = 0; i < enemy.Length; i ++)
+        {
+            if(enemy[i].IsActive())
+            {
+                enemy[i].SetActivation(false);
+            }
+        }
     }
 }

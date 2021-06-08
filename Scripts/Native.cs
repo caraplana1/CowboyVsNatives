@@ -85,7 +85,6 @@ public class Native : RigidBody2D
     {   
         if (isActive)
         {
-            // Gets the path and correct the with the current object.
             path = map.GetSimplePath(GlobalPosition, playerPosition);
         }
     }
@@ -107,4 +106,8 @@ public class Native : RigidBody2D
         }
     }
 
+    public bool IsActive()
+    {
+        return isActive;
+    }
 }

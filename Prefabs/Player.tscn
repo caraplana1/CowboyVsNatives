@@ -28,6 +28,8 @@ extents = Vector2( 32.1136, 59.5391 )
 mode = 2
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
+contacts_reported = 1
+contact_monitor = true
 linear_damp = 20.0
 script = ExtResource( 2 )
 speed = 110.0
@@ -83,5 +85,6 @@ shape = SubResource( 3 )
 wait_time = 0.5
 autostart = true
 
+[connection signal="body_entered" from="." to="." method="OnPlayerBodyEntered"]
 [connection signal="timeout" from="ShootTimer" to="." method="ReadyToShoot"]
 [connection signal="timeout" from="EmitPosition" to="." method="OnEmitPositionTimer"]

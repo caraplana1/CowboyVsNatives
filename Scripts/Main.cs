@@ -11,10 +11,15 @@ public class Main : Node
     [Export]private int amountBullets = 12; 
     private int bulletCounter;
 
+
+    private PlayerController player;
     #endregion
 
     public override void _Ready()
     {
+
+        player = GetChild<PlayerController>(1);
+
         // Bullets Creation;
         bullet = new Bullet[amountBullets];
         bulletCounter = 0;
@@ -25,7 +30,7 @@ public class Main : Node
             bullet[i].SetActivation(false);
         }
 
-        GetChild(1).Connect("Shooting", this, "OnShootingBullet");
+        player.Connect("Shooting", this, "OnShootingBullet");
     }
 
     private void OnShootingBullet(Vector2 position, float rotation)
