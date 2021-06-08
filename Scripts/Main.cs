@@ -20,9 +20,9 @@ public class Main : Node
         bulletCounter = 0;
         for (int i = 0; i < amountBullets; i++)
         {
-            bullet[i] = (Bullet)bulletScene.Instance();
+            bullet[i] = (Bullet) bulletScene.Instance();
             AddChild(bullet[i]);
-            bullet[i].Visible = false;
+            bullet[i].SetActivation(false);
         }
 
         GetChild(1).Connect("Shooting", this, "OnShootingBullet");
@@ -30,10 +30,9 @@ public class Main : Node
 
     private void OnShootingBullet(Vector2 position, float rotation)
     {
-        bullet[bulletCounter].RestoreSpeed();
+        bullet[bulletCounter].SetActivation(true);
         bullet[bulletCounter].Position = position;
         bullet[bulletCounter].Rotation = rotation;
-        bullet[bulletCounter].Visible = true;
 
         if (bulletCounter >= amountBullets - 1)
         {

@@ -8,7 +8,7 @@ public class Bullet : Area2D
 	// Speed is set in the editor and aux is the valu that multiply the vector
 	// aux is a copy of speed but change, speed doesn't
 	[Export]private float speed;
-	private float aux;
+	private CollisionShape2D collider;
 
 	[Signal]private delegate void NativeKilled();
 
@@ -16,18 +16,17 @@ public class Bullet : Area2D
 
 	public override void _Ready()
 	{
-		aux = speed;
+		collider = GetChild<CollisionShape2D>(1);
 	}
 
 	public override void _Process(float delta)
 	{
-		Translate(Vector2.Up.Rotated(Rotation) * aux * delta);
+		Translate(Vector2.Up.Rotated(Rotation) * speed * delta);
 	}
 
 	private void OnBodyEntered(Node body)
 	{
-		aux = 0;
-		Visible = false;
+		SetActivation(false);
 
 		if (body.IsInGroup("Enemy"))
 		{
@@ -37,9 +36,11 @@ public class Bullet : Area2D
 		}
 	}
 
-	public void RestoreSpeed()
+	public void SetActivation(bool activationMode)
 	{
-		aux = speed;
+		Visible = activationMode;
+		SetProcess(activationMode);
+		collider.Disabled = !activationMode;
 	}
 
 }

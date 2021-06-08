@@ -43,17 +43,21 @@ public class Native : RigidBody2D
 
     void MoveAlongPath(float distance)
     {
-        Vector2 startPoint = Position;
+        // distance Is the long of the enmey will move.
         float distanceToNextPoint;
         List<Vector2> aux;
-
+        
+        // As long as there are a path and enough distance to move.
         while(distance > 0 && path.Length > 0)
         {
-            distanceToNextPoint = startPoint.DistanceTo(path[0]);
+            distanceToNextPoint = Position.DistanceTo(path[0]);
 
             if (distance <= distanceToNextPoint && distance >= 0)
             {
+                // If the gap is bigger to the distance to move and there's distance to move.
+                // Moves towards the next point.
                 Position += Position.DirectionTo(path[0]) * distance;
+                // Ajust the view of the enemy.
                 if (Position.DirectionTo(path[0]).x < 0)
                 {
                     sprite.FlipH = true;
@@ -63,18 +67,16 @@ public class Native : RigidBody2D
                     sprite.FlipH = false;
                 }
             }
-            else if (distance < 0)
-            {
-                Position = path[0];
-            }
             else
             {
-                startPoint = path[0];
+                // If the gap is smaller to the distance to move or there's distance to move.
+                // Poll the head of the path.
+                Position = path[0];
                 aux = path.ToList<Vector2>();
                 aux.RemoveAt(0);
                 path = aux.ToArray<Vector2>();
             }
-
+            // The distance to walk is reduced by the movement already performed
             distance -= distanceToNextPoint;
         }
     }

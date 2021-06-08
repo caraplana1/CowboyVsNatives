@@ -42,13 +42,10 @@ public class MobSpawner : Node
         {
             enemy[i] = enemyScene.Instance<Native>();
             AddChild(enemy[i]);
-            // enemy[i].SetActivation(false);
+            enemy[i].SetActivation(false);
             enemy[i].GlobalPosition = spawnPoints[0].GlobalPosition;
             player.Connect("SharePosition", enemy[i], "GetPlayerPosition");
         }
-
-        enemy[0].SetActivation(false);
-        // enemy[0].GlobalPosition = spawnPoints[3].GlobalPosition;
     }
 
     private void OnSpawnTimeOut()
