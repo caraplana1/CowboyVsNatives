@@ -72,7 +72,7 @@ visible = false
 position = Vector2( 80, 8 )
 
 [node name="ShootTimer" type="Timer" parent="."]
-wait_time = 0.275
+wait_time = 0.75
 one_shot = true
 autostart = true
 

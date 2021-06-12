@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public class Main : Node
 {
@@ -13,6 +12,8 @@ public class Main : Node
 
 
     private PlayerController player;
+    [Signal] private delegate void NewGame();
+
     #endregion
 
     public override void _Ready()
@@ -31,6 +32,7 @@ public class Main : Node
         }
 
         player.Connect("Shooting", this, "OnShootingBullet");
+        Connect("NewGame", player, "PlayerNewGame");
     }
 
     private void OnShootingBullet(Vector2 position, float rotation)
@@ -39,7 +41,7 @@ public class Main : Node
         bullet[bulletCounter].Position = position;
         bullet[bulletCounter].Rotation = rotation;
 
-        if (bulletCounter >= amountBullets - 1)
+        if (bulletCounter == amountBullets - 1)
         {
             bulletCounter = 0;
         }

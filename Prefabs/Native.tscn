@@ -34,7 +34,7 @@ contacts_reported = 1
 contact_monitor = true
 linear_damp = 20.0
 script = ExtResource( 2 )
-speed = 80.0
+speed = 120.0
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.75, 0.75 )

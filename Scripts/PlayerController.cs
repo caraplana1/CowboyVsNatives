@@ -24,7 +24,6 @@ public class PlayerController : RigidBody2D
 	private bool readyToShoot;
 	[Signal] private delegate void Shooting(Vector2 position, float degrees);
 
-
 	[Signal] private delegate void SharePosition(Vector2 _position);
 
 	[Signal] private delegate void GameOver();
@@ -35,19 +34,19 @@ public class PlayerController : RigidBody2D
 
 	public override void _Ready()
 	{
-	  // Getting Children.
-	  pistolPosition = new Position2D[4];
-	  viewport = GetViewportRect();
-	  sprite = GetChild<Sprite>(0);
-	  animationPlayer = GetChild<AnimationPlayer>(1);
-	  ShootTimer = GetChild<Timer>(6);
+		// Getting Children.
+	  	pistolPosition = new Position2D[4];
+	  	viewport = GetViewportRect();
+	  	sprite = GetChild<Sprite>(0);
+	  	animationPlayer = GetChild<AnimationPlayer>(1);
+	  	ShootTimer = GetChild<Timer>(6);
 
-	  for (int i = 0; i < 4; i++)
-	  {
-		pistolPosition[i] = GetChild<Position2D>(i+2);
-	  }
+		for (int i = 0; i < 4; i++)
+		{
+			pistolPosition[i] = GetChild<Position2D>(i+2);
+		}
 
-	  isActive = true;
+	  	isActive = true;
 	}
 
 	public override void _Process(float delta)
@@ -167,6 +166,12 @@ public class PlayerController : RigidBody2D
 	void OnEmitPositionTimer()
 	{
 		EmitSignal("SharePosition", GlobalPosition);
+	}
+	
+	void PlayerNewGame()
+	{
+		Position = new Vector2(viewport.Size.x, viewport.Size.y);
+		SetActive(true);
 	}
 
 	private void PlayerGameOver()

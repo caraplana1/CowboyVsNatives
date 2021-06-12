@@ -9,13 +9,15 @@ public class MobSpawner : Node
     private Position2D[] spawnPoints;
     private Timer spawnTimer;
 
-
     // Enemy.
     [Export] private PackedScene enemyScene;
     private Native[] enemy;
     [Export] private int amountEnemys;
     private int enemycounter;
-    private Navigation2D map;
+
+    // Spaw Logic.
+    [Export] float minSpawTime , maxSpawTime; 
+    [Export] int minperturn, maxperturn;
 
     #endregion
 
@@ -23,7 +25,6 @@ public class MobSpawner : Node
     {
         // Brothers
         PlayerController player = GetParent().GetChild<PlayerController>(1);
-        map = GetParent().GetChild<Navigation2D>(0);
 
         // Children
         spawnPoints = new Position2D[4];
@@ -48,14 +49,17 @@ public class MobSpawner : Node
         }
 
         player.Connect("GameOver", this, "DisableEnemies");
+        GetParent<Main>().Connect("NewGame", this, "StartNewGame");
+
+        if (minSpawTime > maxSpawTime){ minSpawTime = maxSpawTime; }
+        if (minperturn > maxperturn){ minperturn = maxperturn; }
+
     }
 
-    private void OnSpawnTimeOut()
+    private void StartNewGame()
     {
-        enemy[0].SetActivation(true);
-        enemy[0].GlobalPosition = spawnPoints[0].GlobalPosition;
+        ChangeSpawnTime();
     }
-
     private void DisableEnemies()
     {
         for (int i = 0; i < enemy.Length; i ++)
@@ -65,5 +69,43 @@ public class MobSpawner : Node
                 enemy[i].SetActivation(false);
             }
         }
+
+        spawnTimer.Stop();
     }
+
+    #region  Spawn Logic
+    private void OnSpawnTimeOut()
+    {
+        Spawn();
+        ChangeSpawnTime();
+    }
+
+    void Spawn()
+    {
+        Random rand = new Random();
+
+        for (int i = 0; i < rand.Next(minperturn, maxperturn); i ++)
+        {
+            enemy[enemycounter].Position = spawnPoints[rand.Next(4)].GlobalPosition;
+            enemy[enemycounter].SetActivation(true);
+
+            if (enemycounter == amountEnemys - 1)
+            {
+                enemycounter = 0;
+            }
+            else
+            {
+                enemycounter ++;
+            }
+
+        }
+    }
+
+    void ChangeSpawnTime()
+    {
+        Random rand = new Random();
+        spawnTimer.WaitTime = (float) rand.NextDouble() * (maxSpawTime - minSpawTime) + minSpawTime;
+        spawnTimer.Start();
+    }
+    #endregion
 }

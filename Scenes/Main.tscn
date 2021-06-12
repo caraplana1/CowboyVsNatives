@@ -29,6 +29,9 @@ position = Vector2( 520, 360 )
 script = ExtResource( 5 )
 enemyScene = ExtResource( 6 )
 amountEnemys = 15
+minSpawTime = 0.5
+maxSpawTime = 1.5
+maxperturn = 5
 
 [node name="Noth" type="Position2D" parent="MobSpawner"]
 position = Vector2( 520, -40 )
