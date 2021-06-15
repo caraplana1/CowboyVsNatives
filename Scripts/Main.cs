@@ -14,12 +14,19 @@ public class Main : Node
     private PlayerController player;
     [Signal] private delegate void NewGame();
 
+    private UserInterface ui;
+
     #endregion
 
     public override void _Ready()
     {
 
         player = GetChild<PlayerController>(1);
+        ui = GetChild<UserInterface>(3);
+
+        player.Connect("Shooting", this, "OnShootingBullet");
+        player.Connect("GameOver", ui, "GameOver");
+        Connect("NewGame", player, "PlayerNewGame");
 
         // Bullets Creation;
         bullet = new Bullet[amountBullets];
@@ -29,10 +36,9 @@ public class Main : Node
             bullet[i] = (Bullet) bulletScene.Instance();
             AddChild(bullet[i]);
             bullet[i].SetActivation(false);
+            bullet[i].Connect("NativeKilled", ui, "IncreasePoints");
         }
 
-        player.Connect("Shooting", this, "OnShootingBullet");
-        Connect("NewGame", player, "PlayerNewGame");
     }
 
     private void OnShootingBullet(Vector2 position, float rotation)

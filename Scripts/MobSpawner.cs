@@ -17,7 +17,7 @@ public class MobSpawner : Node
 
     // Spaw Logic.
     [Export] float minSpawTime , maxSpawTime; 
-    [Export] int minperturn, maxperturn;
+    [Export] int minPerTurn, maxPerTurn;
 
     #endregion
 
@@ -48,11 +48,11 @@ public class MobSpawner : Node
             player.Connect("SharePosition", enemy[i], "GetPlayerPosition");
         }
 
-        player.Connect("GameOver", this, "DisableEnemies");
+        player.Connect("GameOver", this, "DisableAllEnemies");
         GetParent<Main>().Connect("NewGame", this, "StartNewGame");
 
         if (minSpawTime > maxSpawTime){ minSpawTime = maxSpawTime; }
-        if (minperturn > maxperturn){ minperturn = maxperturn; }
+        if (minPerTurn > maxPerTurn){ minPerTurn = maxPerTurn; }
 
     }
 
@@ -60,7 +60,8 @@ public class MobSpawner : Node
     {
         ChangeSpawnTime();
     }
-    private void DisableEnemies()
+    
+    private void DisableAllEnemies()
     {
         for (int i = 0; i < enemy.Length; i ++)
         {
@@ -82,9 +83,11 @@ public class MobSpawner : Node
 
     void Spawn()
     {
+        // Spawn a random amount of enemy, between minPerTurn and maxPerTurn,
+        // and then move them to random positions each.
         Random rand = new Random();
 
-        for (int i = 0; i < rand.Next(minperturn, maxperturn); i ++)
+        for (int i = 0; i < rand.Next(minPerTurn, maxPerTurn); i ++)
         {
             enemy[enemycounter].Position = spawnPoints[rand.Next(4)].GlobalPosition;
             enemy[enemycounter].SetActivation(true);
@@ -103,8 +106,12 @@ public class MobSpawner : Node
 
     void ChangeSpawnTime()
     {
+        // Changes the timer in a number between the minSpawTime and maxSpawTime.
         Random rand = new Random();
-        spawnTimer.WaitTime = (float) rand.NextDouble() * (maxSpawTime - minSpawTime) + minSpawTime;
+        float randNumber;
+
+        randNumber = (float) rand.NextDouble() * (maxSpawTime - minSpawTime) + minSpawTime;
+        spawnTimer.WaitTime = randNumber;
         spawnTimer.Start();
     }
     #endregion

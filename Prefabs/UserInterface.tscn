@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Custom Fonts/Early GameBoy.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Scripts/UserInterface.cs" type="Script" id=2]
+
+[node name="UserInterface" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.12244
+margin_top = -0.527863
+margin_right = 1.12244
+margin_bottom = -0.527832
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Points" type="Label" parent="."]
+margin_left = 35.0
+margin_top = 35.0
+margin_right = 70.0
+margin_bottom = 35.0
+rect_scale = Vector2( 3.5, 3.5 )
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.411765, 0, 1, 1 )
+custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+text = "0"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

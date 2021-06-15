@@ -38,7 +38,6 @@ speed = 110.0
 scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 1 )
 hframes = 7
-frame = 1
 __meta__ = {
 "_editor_description_": ""
 }
@@ -72,7 +71,7 @@ visible = false
 position = Vector2( 80, 8 )
 
 [node name="ShootTimer" type="Timer" parent="."]
-wait_time = 0.75
+wait_time = 0.4
 one_shot = true
 autostart = true
 
