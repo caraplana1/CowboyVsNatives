@@ -48,9 +48,6 @@ public class MobSpawner : Node
             player.Connect("SharePosition", enemy[i], "GetPlayerPosition");
         }
 
-        player.Connect("GameOver", this, "DisableAllEnemies");
-        GetParent<Main>().Connect("NewGame", this, "StartNewGame");
-
         if (minSpawTime > maxSpawTime){ minSpawTime = maxSpawTime; }
         if (minPerTurn > maxPerTurn){ minPerTurn = maxPerTurn; }
 
@@ -59,6 +56,11 @@ public class MobSpawner : Node
     private void StartNewGame()
     {
         ChangeSpawnTime();
+    }
+
+    private void GameOver()
+    {
+        DisableAllEnemies();
     }
     
     private void DisableAllEnemies()

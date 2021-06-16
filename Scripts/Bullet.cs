@@ -4,9 +4,8 @@ public class Bullet : Area2D
 {
 	#region  Field Declaration
 
-	// Speed is set in the editor and aux is the valu that multiply the vector
-	// aux is a copy of speed but change, speed doesn't
 	[Export]private float speed;
+	private bool isActive;
 
 	[Signal]private delegate void NativeKilled();
 
@@ -34,6 +33,12 @@ public class Bullet : Area2D
 		Visible = activationMode;
 		SetProcess(activationMode);
 		GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled", !activationMode);
+		isActive = activationMode;
+	}
+
+	public bool IsActive()
+	{
+		return isActive;
 	}
 
 }
