@@ -55,15 +55,9 @@ public class Native : RigidBody2D
                 // If the gap is bigger to the distance to move and there's distance to move.
                 // Moves towards the next point.
                 Position += Position.DirectionTo(path[0]) * distance;
+
                 // Ajust the view of the enemy.
-                if (Position.DirectionTo(path[0]).x < 0)
-                {
-                    sprite.FlipH = true;
-                }
-                else
-                {
-                    sprite.FlipH = false;
-                }
+                sprite.FlipH = Position.DirectionTo(path[0]).x < 0 ? true : false;
             }
             else
             {
@@ -74,6 +68,7 @@ public class Native : RigidBody2D
                 aux.RemoveAt(0);
                 path = aux.ToArray<Vector2>();
             }
+
             // The distance to walk is reduced by the movement already performed
             distance -= distanceToNextPoint;
         }
@@ -81,10 +76,7 @@ public class Native : RigidBody2D
 
     public void GetPlayerPosition(Vector2 playerPosition)
     {   
-        if (isActive)
-        {
-            path = map.GetSimplePath(GlobalPosition, playerPosition);
-        }
+        path = isActive ? map.GetSimplePath(GlobalPosition, playerPosition) : null;
     }
 
     public void SetActivation(bool activationMode)

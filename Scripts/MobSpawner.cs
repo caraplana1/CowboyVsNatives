@@ -48,8 +48,9 @@ public class MobSpawner : Node
             player.Connect("SharePosition", enemy[i], "GetPlayerPosition");
         }
 
-        if (minSpawTime > maxSpawTime){ minSpawTime = maxSpawTime; }
-        if (minPerTurn > maxPerTurn){ minPerTurn = maxPerTurn; }
+        // If min number > max number then their are the same else min keep their value.
+        minSpawTime = minSpawTime > maxSpawTime ? maxSpawTime : minSpawTime;
+        minPerTurn = minPerTurn > maxPerTurn ? maxPerTurn : minPerTurn;
 
     }
 
@@ -94,15 +95,7 @@ public class MobSpawner : Node
             enemy[enemycounter].Position = spawnPoints[rand.Next(4)].GlobalPosition;
             enemy[enemycounter].SetActivation(true);
 
-            if (enemycounter == amountEnemys - 1)
-            {
-                enemycounter = 0;
-            }
-            else
-            {
-                enemycounter ++;
-            }
-
+            enemycounter = enemycounter == amountEnemys - 1 ? 0 : ++enemycounter ;
         }
     }
 

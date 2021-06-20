@@ -57,14 +57,7 @@ public class Main : Node
         bullet[bulletCounter].Position = position;
         bullet[bulletCounter].Rotation = rotation;
 
-        if (bulletCounter == amountBullets - 1)
-        {
-            bulletCounter = 0;
-        }
-        else
-        {
-            bulletCounter++;
-        }
+        bulletCounter = bulletCounter == amountBullets-1 ? 0 : ++bulletCounter;
     }
 
     private void DeativateAllBullets()
