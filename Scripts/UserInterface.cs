@@ -34,6 +34,7 @@ public class UserInterface : Control
     private void GameOver()
     {
         textPoints.Visible = false;
+        newGameButton.Text = "New Game";
         newGameButton.Visible = true;
         textGameOver.Visible = true;
         points = -1;

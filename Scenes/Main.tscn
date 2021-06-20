@@ -50,12 +50,10 @@ position = Vector2( -40, 360 )
 
 [node name="EnemySpawnTimer" type="Timer" parent="MobSpawner"]
 one_shot = true
-autostart = true
 
 [node name="UserInterface" parent="." instance=ExtResource( 7 )]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 8 )
-autoplay = true
 
 [connection signal="timeout" from="MobSpawner/EnemySpawnTimer" to="MobSpawner" method="OnSpawnTimeOut"]

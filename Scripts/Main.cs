@@ -10,13 +10,15 @@ public class Main : Node
     [Export]private int amountBullets = 12; 
     private int bulletCounter;
 
+    private AudioStreamPlayer2D music;
+
     [Signal] private delegate void NewGame();
 
     #endregion
 
     public override void _Ready()
     {
-        // Signal Connections.
+        #region Children Signal Connections.
         PlayerController player;
         MobSpawner spawner;
         UserInterface ui;
@@ -24,6 +26,7 @@ public class Main : Node
         player = GetChild<PlayerController>(1);
         spawner = GetChild<MobSpawner>(2);
         ui = GetChild<UserInterface>(3);
+        music = GetChild<AudioStreamPlayer2D>(4);
 
         player.Connect("Shooting", this, "OnShootingBullet");
 
@@ -35,6 +38,10 @@ public class Main : Node
         Connect("NewGame", player, "StartNewGame");
         Connect("NewGame", spawner, "StartNewGame");
         ui.Connect("ButtonNewGamePressed", this, "StartNewGame");
+
+        #endregion
+
+        player.SetActive(false);
 
         // Bullets Creation;
         bullet = new Bullet[amountBullets];
@@ -74,10 +81,12 @@ public class Main : Node
     void StartNewGame()
     {
         EmitSignal("NewGame");
+        music.Play();
     }
 
     void GameOver()
     {
         DeativateAllBullets();
+        music.Stop();
     }
 }
