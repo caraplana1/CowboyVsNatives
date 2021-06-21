@@ -40,7 +40,6 @@ speed = 120.0
 scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 1 )
 hframes = 3
-frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

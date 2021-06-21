@@ -170,7 +170,6 @@ public class PlayerController : RigidBody2D
 	
 	void StartNewGame()
 	{
-		Position = new Vector2(viewport.Size.x, viewport.Size.y);
 		SetActive(true);
 	}
 

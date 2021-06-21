@@ -76,7 +76,10 @@ public class Native : RigidBody2D
 
     public void GetPlayerPosition(Vector2 playerPosition)
     {   
-        path = isActive ? map.GetSimplePath(GlobalPosition, playerPosition) : null;
+        Vector2 thisPosition = map.GetClosestPoint(GlobalPosition);
+        playerPosition = map.GetClosestPoint(playerPosition);
+
+        path = isActive ? map.GetSimplePath(thisPosition, playerPosition) : null;
     }
 
     public void SetActivation(bool activationMode)
