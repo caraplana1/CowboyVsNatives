@@ -27,6 +27,7 @@ tracks/0/keys = {
 "Enemy",
 ]]
 collision_layer = 2
+collision_mask = 5
 mode = 3
 mass = 0.00102041
 gravity_scale = 0.0

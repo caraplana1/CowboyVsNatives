@@ -143,6 +143,9 @@ public class PlayerController : RigidBody2D
 		EmitSignal("Shooting", _position, angle);
 	}
 
+	///<summary>
+    ///Set the object disable from the tree.
+    ///</summary>
 	public void SetActive(bool activationMode)
 	{
 		Visible = activationMode;

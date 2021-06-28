@@ -28,6 +28,9 @@ public class Bullet : Area2D
 		}
 	}
 
+	///<summary>
+    ///Set the object disable from the tree.
+    ///</summary>
 	public void SetActivation(bool activationMode)
 	{
 		Visible = activationMode;

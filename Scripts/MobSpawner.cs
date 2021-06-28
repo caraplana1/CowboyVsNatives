@@ -8,6 +8,7 @@ public class MobSpawner : Node
     // Children.
     private Position2D[] spawnPoints;
     private Timer spawnTimer;
+    private Timer resetPositionTimer;
 
     // Enemy.
     [Export] private PackedScene enemyScene;
@@ -33,6 +34,7 @@ public class MobSpawner : Node
             spawnPoints[i] = GetChild<Position2D>(i);
         }
         spawnTimer = GetChild<Timer>(4);
+        resetPositionTimer = GetChild<Timer>(5);
 
 
         // Enemy Creation & config.
@@ -48,7 +50,7 @@ public class MobSpawner : Node
             player.Connect("SharePosition", enemy[i], "GetPlayerPosition");
         }
 
-        // If min number > max number then their are the same else min keep their value.
+        // Ranges validatios.
         minSpawTime = minSpawTime > maxSpawTime ? maxSpawTime : minSpawTime;
         minPerTurn = minPerTurn > maxPerTurn ? maxPerTurn : minPerTurn;
 
@@ -57,11 +59,15 @@ public class MobSpawner : Node
     private void StartNewGame()
     {
         ChangeSpawnTime();
+
+        resetPositionTimer.WaitTime = spawnTimer.WaitTime;
+        resetPositionTimer.Start();
     }
 
     private void GameOver()
     {
         DisableAllEnemies();
+        resetPositionTimer.Stop();
     }
     
     private void DisableAllEnemies()
@@ -92,16 +98,17 @@ public class MobSpawner : Node
 
         for (int i = 0; i < rand.Next(minPerTurn, maxPerTurn); i ++)
         {
-            enemy[enemycounter].Position = spawnPoints[rand.Next(4)].GlobalPosition;
             enemy[enemycounter].SetActivation(true);
 
             enemycounter = enemycounter == amountEnemys - 1 ? 0 : ++enemycounter ;
         }
     }
 
+    ///<summary>
+    /// Changes the timer wait time between the minSpawTime and maxSpawTime.
+    /// </summary>
     void ChangeSpawnTime()
     {
-        // Changes the timer in a number between the minSpawTime and maxSpawTime.
         Random rand = new Random();
         float randNumber;
 
@@ -109,5 +116,24 @@ public class MobSpawner : Node
         spawnTimer.WaitTime = randNumber;
         spawnTimer.Start();
     }
+
+    void ResetAllPositions()
+    {
+        // Cleans the map of the not active enemies.
+        Random rand = new Random();
+
+        for (int i = 0; i < amountEnemys; i++)
+        {
+            Vector2 newPosition = spawnPoints[rand.Next(4)].GlobalPosition;
+
+            if (!enemy[i].IsActive())
+            {
+                enemy[i].GlobalPosition = newPosition;
+            }
+        }
+
+        resetPositionTimer.WaitTime = spawnTimer.WaitTime;
+    }
+
     #endregion
 }

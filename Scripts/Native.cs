@@ -82,11 +82,14 @@ public class Native : RigidBody2D
         path = isActive ? map.GetSimplePath(thisPosition, playerPosition) : null;
     }
 
+
+    ///<summary>
+    ///Set the object disable from the tree.
+    ///</summary>
     public void SetActivation(bool activationMode)
     {
         Visible = activationMode;
         GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled", !activationMode);
-        Sleeping = !activationMode;
         SetProcess(activationMode);
         isActive = activationMode;
 
