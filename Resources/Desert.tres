@@ -1,58 +1,10 @@
-[gd_resource type="TileSet" load_steps=27 format=2]
+[gd_resource type="TileSet" load_steps=15 format=2]
 
 [ext_resource path="res://Art/DesertTileSet-Sheet.png" type="Texture" id=1]
-
-[sub_resource type="NavigationPolygon" id=1]
-vertices = PoolVector2Array( 65.2454, 80, 65.0516, 60.0126, 80, 60, 80, 80 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
-
-[sub_resource type="NavigationPolygon" id=2]
-vertices = PoolVector2Array( 80, 0, 80, 35.0457, 74.9923, 35.0457, 74.6693, 30.039, 64, 20, 60, 20, 60, 0 )
-polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5, 6 ) ]
-
-[sub_resource type="NavigationPolygon" id=3]
-vertices = PoolVector2Array( 0, 0, 15.1651, 0, 14.9782, 19.8484, 9.93116, 19.9419, 10.2116, 59.9444, 14.8847, 59.9444, 14.9782, 80, 0, 80 )
-polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5, 6, 7 ) ]
 
 [sub_resource type="NavigationPolygon" id=4]
 vertices = PoolVector2Array( 0, 0, 80, 0, 80, 80, 0, 80 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
-
-[sub_resource type="NavigationPolygon" id=5]
-vertices = PoolVector2Array( 0, 60, 15.342, 60.2953, 15.1805, 79.8374, 0, 80 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
-
-[sub_resource type="NavigationPolygon" id=6]
-vertices = PoolVector2Array( 0, 0.32196, 20, 0, 20, 20, 16, 20, 5.16713, 30.2005, 5.16713, 35.2072, 0, 35.0457 )
-polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5, 6 ) ]
-
-[sub_resource type="NavigationPolygon" id=7]
-vertices = PoolVector2Array( 80, 65.0849, 59.8459, 64.8045, 60.0328, 69.945, 20.0303, 69.8515, 19.8434, 64.8045, 0, 65.0849, 0, 80, 80, 80 )
-polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5, 6, 7 ) ]
-
-[sub_resource type="NavigationPolygon" id=8]
-vertices = PoolVector2Array( 0, 80, 0, 0, 80, 0, 80, 34.9389, 70.1991, 34.9389, 70.0376, 29.7707, 35.4754, 29.7707, 19.9709, 44.4677, 9.79602, 59.9723, 10.2469, 79.8038 )
-polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ) ]
-
-[sub_resource type="NavigationPolygon" id=9]
-vertices = PoolVector2Array( 10.1123, 0, 0, 0, 0, 80, 80, 80, 80, 69.9241, 40.26, 69.9241, 15.092, 44.7562, 10.5161, 29.5477 )
-polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5, 6, 7 ) ]
-
-[sub_resource type="NavigationPolygon" id=10]
-vertices = PoolVector2Array( 0, 0, 80, 0, 80, 40, 60, 40, 60, 36, 20, 36, 20, 40, 0, 40 )
-polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5, 6, 7 ) ]
-
-[sub_resource type="NavigationPolygon" id=11]
-vertices = PoolVector2Array( 69.9141, 80, 80, 80, 80, 0, 0, 0, 0, 34.9795, 10.0397, 35.0729, 9.94629, 30.0259, 44.4649, 29.7707, 59.9695, 44.9523, 69.9141, 59.6493 )
-polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ) ]
-
-[sub_resource type="NavigationPolygon" id=12]
-vertices = PoolVector2Array( 80, 0, 80, 80, 0, 80, 0, 70.0755, 40.065, 69.8512, 64.774, 44.616, 69.8987, 29.6991, 70.123, 0 )
-polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5, 6, 7 ) ]
-
-[sub_resource type="NavigationPolygon" id=13]
-vertices = PoolVector2Array( 65.3002, 80, 65.0759, 59.9491, 70.2351, 59.9491, 69.9332, 20.0213, 65.1104, 19.9092, 64.9983, 0.393921, 80, 0, 80, 80 )
-polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5, 6, 7 ) ]
 
 [sub_resource type="ConcavePolygonShape2D" id=14]
 segments = PoolVector2Array( 0, 48, 32, 48, 32, 48, 32, 80, 32, 80, 15.3431, 79.9776, 15.3431, 79.9776, 15.4552, 60.4624, 15.4552, 60.4624, 0, 60.4624, 0, 60.4624, 0, 48 )
@@ -102,7 +54,7 @@ resource_local_to_scene = true
 0/autotile/tile_size = Vector2( 80, 80 )
 0/autotile/spacing = 0
 0/autotile/occluder_map = [  ]
-0/autotile/navpoly_map = [ Vector2( 0, 0 ), SubResource( 1 ), Vector2( 0, 1 ), SubResource( 2 ), Vector2( 0, 2 ), SubResource( 3 ), Vector2( 0, 3 ), SubResource( 4 ), Vector2( 1, 0 ), SubResource( 5 ), Vector2( 1, 1 ), SubResource( 6 ), Vector2( 1, 2 ), SubResource( 7 ), Vector2( 2, 0 ), SubResource( 8 ), Vector2( 2, 1 ), SubResource( 9 ), Vector2( 2, 2 ), SubResource( 10 ), Vector2( 3, 0 ), SubResource( 11 ), Vector2( 3, 1 ), SubResource( 12 ), Vector2( 3, 2 ), SubResource( 13 ) ]
+0/autotile/navpoly_map = [ Vector2( 0, 3 ), SubResource( 4 ) ]
 0/autotile/priority_map = [  ]
 0/autotile/z_index_map = [  ]
 0/occluder_offset = Vector2( 0, 0 )
