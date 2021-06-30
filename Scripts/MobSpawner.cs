@@ -27,12 +27,12 @@ public class MobSpawner : Node
         PlayerController player = GetParent().GetChild<PlayerController>(1);
 
         // Children
-        spawnPoints = new Position2D[4];
-        for (int i = 0; i < 4; i ++)
+        spawnPoints = new Position2D[5];
+        for (int i = 0; i < spawnPoints.Length; i ++)
         {
             spawnPoints[i] = GetChild<Position2D>(i);
         }
-        spawnTimer = GetChild<Timer>(4);
+        spawnTimer = GetChild<Timer>(5);
 
         // Enemy Creation & config.
         enemy = new Native[amountEnemys];
@@ -45,7 +45,7 @@ public class MobSpawner : Node
             enemy[i] = enemyScene.Instance<Native>();
             AddChild(enemy[i]);
             enemy[i].SetActivation(false);
-            enemy[i].GlobalPosition = spawnPoints[rand.Next(4)].GlobalPosition;
+            enemy[i].GlobalPosition = spawnPoints[rand.Next(spawnPoints.Length)].GlobalPosition;
             player.Connect("SharePosition", enemy[i], "GetPlayerPosition");
         }
 
@@ -122,7 +122,7 @@ public class MobSpawner : Node
 
         for (int i = 0; i < amountEnemys; i++)
         {
-            Vector2 newPosition = spawnPoints[rand.Next(4)].GlobalPosition;
+            Vector2 newPosition = spawnPoints[rand.Next(spawnPoints.Length)].GlobalPosition;
 
             if (!enemy[i].IsActive() && !IsInSpawnPosition(enemy[i].GlobalPosition))
             {
