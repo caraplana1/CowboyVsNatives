@@ -33,7 +33,7 @@ position = Vector2( 520, 360 )
 [node name="MobSpawner" type="Node" parent="."]
 script = ExtResource( 5 )
 enemyScene = ExtResource( 6 )
-amountEnemys = 10
+amountEnemys = 13
 minSpawTime = 0.5
 maxSpawTime = 1.5
 minPerTurn = 1
@@ -54,12 +54,9 @@ position = Vector2( -40, 360 )
 [node name="EnemySpawnTimer" type="Timer" parent="MobSpawner"]
 one_shot = true
 
-[node name="ResetAllPositionsTimer" type="Timer" parent="MobSpawner"]
-
 [node name="UserInterface" parent="." instance=ExtResource( 7 )]
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 8 )
 
 [connection signal="timeout" from="MobSpawner/EnemySpawnTimer" to="MobSpawner" method="OnSpawnTimeOut"]
-[connection signal="timeout" from="MobSpawner/ResetAllPositionsTimer" to="MobSpawner" method="ResetAllPositions"]
