@@ -39,7 +39,7 @@ public class UserInterface : Control
     {
         higherScore = points > higherScore ? points : higherScore;
 
-        textHigherScore.Text = "HS: " + higherScore.ToString();
+        textHigherScore.Text = "HS:" + higherScore.ToString();
         newGameButton.Text = "New Game";
         textPoints.Visible = false;
         newGameButton.Visible = true;

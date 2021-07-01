@@ -27,12 +27,14 @@ public class MobSpawner : Node
         PlayerController player = GetParent().GetChild<PlayerController>(1);
 
         // Children
-        spawnPoints = new Position2D[5];
+        int numChildren = GetChildCount() - 1;
+
+        spawnPoints = new Position2D[numChildren];
         for (int i = 0; i < spawnPoints.Length; i ++)
         {
             spawnPoints[i] = GetChild<Position2D>(i);
         }
-        spawnTimer = GetChild<Timer>(5);
+        spawnTimer = GetChild<Timer>(numChildren);
 
         // Enemy Creation & config.
         enemy = new Native[amountEnemys];

@@ -61,5 +61,6 @@ one_shot = true
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 8 )
+volume_db = -5.0
 
 [connection signal="timeout" from="MobSpawner/EnemySpawnTimer" to="MobSpawner" method="OnSpawnTimeOut"]
