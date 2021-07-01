@@ -16,11 +16,10 @@ __meta__ = {
 }
 
 [node name="Points" type="Label" parent="."]
-visible = false
-margin_left = 69.478
-margin_top = 69.478
-margin_right = 94.478
-margin_bottom = 89.478
+margin_left = 70.0
+margin_top = 70.0
+margin_right = 95.0
+margin_bottom = 90.0
 rect_scale = Vector2( 3.5, 3.5 )
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -63,13 +62,12 @@ __meta__ = {
 }
 
 [node name="High Puntuation" type="Label" parent="."]
-visible = false
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -315.0
-margin_top = 71.3391
+margin_top = 70.0
 margin_right = -241.511
-margin_bottom = 91.3391
+margin_bottom = 90.0
 rect_scale = Vector2( 3, 3 )
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
