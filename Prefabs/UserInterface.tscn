@@ -16,6 +16,7 @@ __meta__ = {
 }
 
 [node name="Points" type="Label" parent="."]
+visible = false
 margin_left = 70.0
 margin_top = 70.0
 margin_right = 95.0
@@ -62,6 +63,7 @@ __meta__ = {
 }
 
 [node name="High Puntuation" type="Label" parent="."]
+visible = false
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -315.0

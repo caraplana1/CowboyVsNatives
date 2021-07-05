@@ -37,7 +37,7 @@ amountEnemys = 25
 minSpawTime = 1.0
 maxSpawTime = 2.5
 minPerTurn = 2
-maxPerTurn = 5
+maxPerTurn = 6
 
 [node name="North" type="Position2D" parent="MobSpawner"]
 position = Vector2( 110, -40 )
@@ -52,10 +52,10 @@ position = Vector2( 280, 600 )
 position = Vector2( 680, 600 )
 
 [node name="Weast" type="Position2D" parent="MobSpawner"]
-position = Vector2( -40, 360 )
+position = Vector2( -40, 280 )
 
 [node name="East" type="Position2D" parent="MobSpawner"]
-position = Vector2( 1000, 360 )
+position = Vector2( 1000, 280 )
 
 [node name="EnemySpawnTimer" type="Timer" parent="MobSpawner"]
 one_shot = true

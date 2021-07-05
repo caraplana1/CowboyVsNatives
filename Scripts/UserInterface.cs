@@ -51,7 +51,7 @@ public class UserInterface : Control
     void OnNewGameButtonPressed()
     {
         textPoints.Visible = true;
-        textHigherScore.Visible = true;
+        textHigherScore.Visible = higherScore > 0 ? true : false;
         newGameButton.Visible = false;
         textGameOver.Visible = false;
 
