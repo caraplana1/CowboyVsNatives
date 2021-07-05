@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Fast Arcade Game Over Sound Sound Effects_320kbps.mp3-644b7fdd6f05a6d6e0765104f8560d97.mp3str"
+
+[deps]
+
+source_file="res://Sound/SFX/Fast Arcade Game Over Sound Sound Effects_320kbps.mp3"
+dest_files=[ "res://.import/Fast Arcade Game Over Sound Sound Effects_320kbps.mp3-644b7fdd6f05a6d6e0765104f8560d97.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

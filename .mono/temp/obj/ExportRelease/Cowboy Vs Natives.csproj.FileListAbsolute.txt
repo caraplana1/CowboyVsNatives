@@ -1,0 +1,8 @@
+C:\Users\angel\GameDev\Cowboy Vs Natives\.mono\temp\bin\ExportRelease\Cowboy Vs Natives.dll
+C:\Users\angel\GameDev\Cowboy Vs Natives\.mono\temp\bin\ExportRelease\Cowboy Vs Natives.pdb
+C:\Users\angel\GameDev\Cowboy Vs Natives\.mono\temp\obj\ExportRelease\Cowboy Vs Natives.csproj.AssemblyReference.cache
+C:\Users\angel\GameDev\Cowboy Vs Natives\.mono\temp\obj\ExportRelease\Cowboy Vs Natives.AssemblyInfoInputs.cache
+C:\Users\angel\GameDev\Cowboy Vs Natives\.mono\temp\obj\ExportRelease\Cowboy Vs Natives.AssemblyInfo.cs
+C:\Users\angel\GameDev\Cowboy Vs Natives\.mono\temp\obj\ExportRelease\Cowboy Vs Natives.csproj.CoreCompileInputs.cache
+C:\Users\angel\GameDev\Cowboy Vs Natives\.mono\temp\obj\ExportRelease\Cowboy Vs Natives.dll
+C:\Users\angel\GameDev\Cowboy Vs Natives\.mono\temp\obj\ExportRelease\Cowboy Vs Natives.pdb

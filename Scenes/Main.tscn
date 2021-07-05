@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Main.cs" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Prefabs/Native.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Prefabs/UserInterface.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Sound/Music/POL-pyramid-sands-short.wav" type="AudioStream" id=8]
+[ext_resource path="res://Sound/SFX/Fast Arcade Game Over Sound Sound Effects_320kbps.mp3" type="AudioStream" id=9]
 
 [node name="Main" type="Node"]
 script = ExtResource( 2 )
@@ -66,4 +67,12 @@ one_shot = true
 stream = ExtResource( 8 )
 volume_db = -5.0
 
+[node name="GameOverMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 9 )
+volume_db = -5.0
+
+[node name="StopGameOverSound" type="Timer" parent="."]
+wait_time = 1.35
+
 [connection signal="timeout" from="MobSpawner/EnemySpawnTimer" to="MobSpawner" method="OnSpawnTimeOut"]
+[connection signal="timeout" from="StopGameOverSound" to="." method="StopGameOverSound"]

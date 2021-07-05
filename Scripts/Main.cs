@@ -10,7 +10,10 @@ public class Main : Node
     [Export]private int amountBullets = 12; 
     private int bulletCounter;
 
+    // Sound
     private AudioStreamPlayer2D music;
+    private AudioStreamPlayer2D gameOverSound;
+    private Timer StopGameOverSoundTimer;
 
     [Signal] private delegate void NewGame();
 
@@ -27,6 +30,8 @@ public class Main : Node
         spawner = GetChild<MobSpawner>(2);
         ui = GetChild<UserInterface>(3);
         music = GetChild<AudioStreamPlayer2D>(4);
+        gameOverSound = GetChild<AudioStreamPlayer2D>(5);
+        StopGameOverSoundTimer = GetChild<Timer>(6);
 
         player.Connect("Shooting", this, "OnShootingBullet");
 
@@ -82,11 +87,19 @@ public class Main : Node
     {
         EmitSignal("NewGame");
         music.Play();
+        gameOverSound.Stop();
     }
 
     void GameOver()
     {
+        gameOverSound.Play(0.45f);
+        StopGameOverSoundTimer.Start();
         DeativateAllBullets();
         music.Stop();
+    }
+
+    void StopGameOverSound()
+    {
+        gameOverSound.Stop();
     }
 }

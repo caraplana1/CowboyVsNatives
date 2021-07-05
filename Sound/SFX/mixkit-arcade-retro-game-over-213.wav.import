@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/mixkit-arcade-retro-game-over-213.wav-cb17ffcfce5be128f7a8424314a0b884.sample"
+
+[deps]
+
+source_file="res://Sound/SFX/mixkit-arcade-retro-game-over-213.wav"
+dest_files=[ "res://.import/mixkit-arcade-retro-game-over-213.wav-cb17ffcfce5be128f7a8424314a0b884.sample" ]
+
+[params]
+
+force/8_bit=true
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

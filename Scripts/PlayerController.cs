@@ -46,7 +46,6 @@ public class PlayerController : RigidBody2D
 			pistolPosition[i] = GetChild<Position2D>(i+2);
 		}
 
-	  	isActive = true;
 	}
 
 	public override void _Process(float delta)
