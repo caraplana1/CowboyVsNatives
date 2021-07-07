@@ -39,6 +39,7 @@ speed = 80.0
 scale = Vector2( 0.55, 0.55 )
 texture = ExtResource( 1 )
 hframes = 7
+frame = 1
 __meta__ = {
 "_editor_description_": ""
 }
@@ -83,6 +84,8 @@ shape = SubResource( 3 )
 [node name="EmitPosition" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="body_entered" from="." to="." method="OnPlayerBodyEntered"]
 [connection signal="timeout" from="ShootTimer" to="." method="ReadyToShoot"]

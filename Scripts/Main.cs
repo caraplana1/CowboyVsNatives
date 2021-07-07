@@ -26,6 +26,7 @@ public class Main : Node
         MobSpawner spawner;
         UserInterface ui;
 
+        // Getting Children. 
         player = GetChild<PlayerController>(1);
         spawner = GetChild<MobSpawner>(2);
         ui = GetChild<UserInterface>(3);

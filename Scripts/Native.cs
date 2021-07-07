@@ -38,7 +38,9 @@ public class Native : RigidBody2D
         }
     }
 
-
+    ///<summary>
+    ///Move the enemy in the given path towards the player
+    ///</summary>
     void MoveAlongPath(float distance)
     {
         // distance Is the long of the enmey will move.

@@ -6,6 +6,7 @@ public class Bullet : Area2D
 
 	[Export]private float speed;
 	private bool isActive;
+	private AudioStreamPlayer2D nativeKilledSound;
 
 	[Signal]private delegate void NativeKilled();
 
@@ -19,9 +20,11 @@ public class Bullet : Area2D
 	private void OnBodyEntered(Node body)
 	{
 		SetActivation(false);
+		nativeKilledSound = GetChild<AudioStreamPlayer2D>(2);
 
 		if (body.IsInGroup("Enemy"))
 		{
+			nativeKilledSound.Play();
 			Native enemy = (Native)body;
 			enemy.SetActivation(false);
 			EmitSignal("NativeKilled");

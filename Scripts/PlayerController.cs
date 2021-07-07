@@ -19,13 +19,14 @@ public class PlayerController : RigidBody2D
 	private Position2D[] pistolPosition;
 	private Sprite sprite;
 	private Timer ShootTimer;
+	private AudioStreamPlayer2D shootSound;
 
 	// Shooting
 	private bool readyToShoot;
 	[Signal] private delegate void Shooting(Vector2 position, float degrees);
 
+	// Others Signals.
 	[Signal] private delegate void SharePosition(Vector2 _position);
-
 	[Signal] private delegate void GameOver();
 
 	private const float phi = (float) Math.PI / 180;
@@ -39,13 +40,14 @@ public class PlayerController : RigidBody2D
 	  	viewport = GetViewportRect();
 	  	sprite = GetChild<Sprite>(0);
 	  	animationPlayer = GetChild<AnimationPlayer>(1);
-	  	ShootTimer = GetChild<Timer>(6);
 
 		for (int i = 0; i < 4; i++)
 		{
 			pistolPosition[i] = GetChild<Position2D>(i+2);
 		}
 
+		ShootTimer = GetChild<Timer>(6);
+		shootSound = GetChild<AudioStreamPlayer2D>(9);
 	}
 
 	public override void _Process(float delta)
@@ -132,9 +134,12 @@ public class PlayerController : RigidBody2D
 		}
 	}
 
+	///<summary>
+	///Funtion to set the correct frame, start the timer to shoot and emmit the signal.
+	///</summary>
 	void Shoot(Vector2 _position, float angle, int frame)
 	{
-		// Funtion to set the correct frame, start the timer to shoot and emmit the signal.
+		shootSound.Play();
 		sprite.Frame = frame;
 
 		readyToShoot = false;
