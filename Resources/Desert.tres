@@ -13,16 +13,16 @@ segments = PoolVector2Array( 0, 48, 32, 48, 32, 48, 32, 80, 32, 80, 15.3431, 79.
 segments = PoolVector2Array( 48, 80, 48, 48, 48, 48, 80, 48, 80, 48, 79.9776, 60.4624, 79.9776, 60.4624, 63.8271, 60.4624, 63.8271, 60.4624, 64, 80, 64, 80, 48, 80 )
 
 [sub_resource type="ConvexPolygonShape2D" id=4]
-points = PoolVector2Array( 4, 40, 20, 40, 20, 36, 60, 36, 60, 40, 76, 40, 76, 44, 4, 44 )
+points = PoolVector2Array( 2, 42, 18, 42, 18, 34, 58, 34, 58, 42, 78, 42, 78, 46, 2, 46 )
 
 [sub_resource type="ConvexPolygonShape2D" id=5]
-points = PoolVector2Array( 20, 4, 20, 76, 16, 76, 16, 60, 8, 60, 8, 20, 16, 20, 16, 4 )
+points = PoolVector2Array( 20, 2, 20, 78, 16, 78, 16, 62, 12, 62, 12, 18, 16, 18, 16, 2 )
 
 [sub_resource type="ConvexPolygonShape2D" id=6]
-points = PoolVector2Array( 76, 64, 60, 64, 60, 72, 20, 72, 20, 64, 4, 64, 4, 60, 76, 60 )
+points = PoolVector2Array( 79, 66, 59, 66, 59, 70, 19, 70, 19, 66, 3, 66, 3, 62, 79, 62 )
 
 [sub_resource type="ConvexPolygonShape2D" id=7]
-points = PoolVector2Array( 60, 76, 60, 4, 64, 4, 64, 20, 72, 20, 72, 60, 64, 60, 64, 76 )
+points = PoolVector2Array( 61, 78, 61, 2, 65, 2, 65, 22, 69, 22, 69, 62, 65, 62, 65, 78 )
 
 [sub_resource type="ConcavePolygonShape2D" id=8]
 segments = PoolVector2Array( 60, 0, 60, 20, 60, 20, 64, 20, 64, 20, 76, 32, 76, 32, 76, 36, 76, 36, 80, 36, 80, 36, 80, 40, 80, 40, 56, 40, 56, 40, 56, 0, 56, 0, 60, 0 )
@@ -48,11 +48,11 @@ resource_local_to_scene = true
 0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 0, 322, 321 )
+0/region = Rect2( 0, 0, 337, 338 )
 0/tile_mode = 2
 0/autotile/icon_coordinate = Vector2( 0, 3 )
 0/autotile/tile_size = Vector2( 80, 80 )
-0/autotile/spacing = 0
+0/autotile/spacing = 5
 0/autotile/occluder_map = [  ]
 0/autotile/navpoly_map = [ Vector2( 0, 3 ), SubResource( 1 ) ]
 0/autotile/priority_map = [  ]
