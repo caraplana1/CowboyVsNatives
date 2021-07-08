@@ -8,7 +8,7 @@
 [ext_resource path="res://Prefabs/Native.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Prefabs/UserInterface.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Sound/Music/POL-pyramid-sands-short.wav" type="AudioStream" id=8]
-[ext_resource path="res://Sound/SFX/Fast Arcade Game Over Sound Sound Effects_320kbps.mp3" type="AudioStream" id=9]
+[ext_resource path="res://Sound/Music/Fast Arcade Game Over Sound Sound Effects_320kbps.mp3" type="AudioStream" id=9]
 
 [node name="Main" type="Node"]
 script = ExtResource( 2 )
@@ -65,7 +65,7 @@ one_shot = true
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 8 )
-volume_db = -5.0
+volume_db = -7.5
 
 [node name="GameOverMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 9 )
