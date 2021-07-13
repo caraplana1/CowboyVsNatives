@@ -7,7 +7,7 @@ public class UserInterface : Control
 
     // Children
     private Label textPoints;
-    private Button newGameButton;
+    private TextureButton newGameButton;
     private Label textGameOver;
     private Label textHigherScore;
 
@@ -21,7 +21,7 @@ public class UserInterface : Control
     public override void _Ready()
     {
         textPoints = GetChild<Label>(0);
-        newGameButton = GetChild<Button>(1);
+        newGameButton = GetChild<TextureButton>(1);
         textGameOver = GetChild<Label>(2);
         textHigherScore = GetChild<Label>(3);
 
@@ -40,7 +40,7 @@ public class UserInterface : Control
         higherScore = points > higherScore ? points : higherScore;
 
         textHigherScore.Text = "HS:" + higherScore.ToString();
-        newGameButton.Text = "New Game";
+        newGameButton.GetChild<Label>(0).Text = "New Game";
         textPoints.Visible = false;
         newGameButton.Visible = true;
         textGameOver.Visible = true;
