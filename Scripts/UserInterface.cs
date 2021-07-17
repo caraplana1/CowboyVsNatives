@@ -10,11 +10,16 @@ public class UserInterface : Control
     private TextureButton newGameButton;
     private Label textGameOver;
     private Label textHigherScore;
+    private ColorRect controlsWindow;
 
     [Signal] delegate void ButtonNewGamePressed();
 
     private int points;
     private int higherScore;
+
+    // Control window
+    private bool isControlActive;
+    private bool isGameOver;
 
     #endregion
 
@@ -24,9 +29,13 @@ public class UserInterface : Control
         newGameButton = GetChild<TextureButton>(1);
         textGameOver = GetChild<Label>(2);
         textHigherScore = GetChild<Label>(3);
+        controlsWindow = GetChild<ColorRect>(4);
 
         points = 0;
         higherScore = 0;
+
+        isGameOver = false;
+        isControlActive = true;
     }
 
     private void IncreasePoints()
@@ -44,12 +53,12 @@ public class UserInterface : Control
         textPoints.Visible = false;
         newGameButton.Visible = true;
         textGameOver.Visible = true;
-        points = -1;
-        IncreasePoints();
     }
 
     void OnNewGameButtonPressed()
     {
+        points = 0;
+        textPoints.Text = points.ToString();
         textPoints.Visible = true;
         textHigherScore.Visible = higherScore > 0 ? true : false;
         newGameButton.Visible = false;
