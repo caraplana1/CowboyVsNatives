@@ -31,11 +31,30 @@ public class UserInterface : Control
         textHigherScore = GetChild<Label>(3);
         controlsWindow = GetChild<ColorRect>(4);
 
-        points = 0;
-        higherScore = 0;
+        points = higherScore = 0;
 
-        isGameOver = false;
-        isControlActive = true;
+        isGameOver = isControlActive = true;
+    }
+
+    public override void _UnhandledInput(InputEvent input)
+    {
+        // Enter buttom programed to play new game and quit controls page.
+        if(input.IsActionReleased("ui_accept"))
+        {
+            if(isControlActive)
+            {
+                isControlActive = false;
+
+                controlsWindow.Visible = false;
+                newGameButton.Visible = true;
+                GD.Print("Desactivando controles");
+                
+            }
+            else if(isGameOver)
+            {
+                OnNewGameButtonPressed();
+            }
+        }
     }
 
     private void IncreasePoints()
@@ -51,8 +70,7 @@ public class UserInterface : Control
         textHigherScore.Text = "HS:" + higherScore.ToString();
         newGameButton.GetChild<Label>(0).Text = "New Game";
         textPoints.Visible = false;
-        newGameButton.Visible = true;
-        textGameOver.Visible = true;
+        newGameButton.Visible = textGameOver.Visible = isGameOver = true;
     }
 
     void OnNewGameButtonPressed()
@@ -63,6 +81,7 @@ public class UserInterface : Control
         textHigherScore.Visible = higherScore > 0 ? true : false;
         newGameButton.Visible = false;
         textGameOver.Visible = false;
+        isGameOver = false;
 
         EmitSignal("ButtonNewGamePressed");
     }
