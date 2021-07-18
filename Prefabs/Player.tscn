@@ -40,7 +40,6 @@ speed = 80.0
 scale = Vector2( 0.55, 0.55 )
 texture = ExtResource( 1 )
 hframes = 7
-frame = 1
 __meta__ = {
 "_editor_description_": ""
 }
@@ -52,26 +51,22 @@ __meta__ = {
 }
 
 [node name="North" type="Position2D" parent="."]
-visible = false
-position = Vector2( 0, -80 )
+position = Vector2( 0, -60 )
 __meta__ = {
 "_editor_description_": ""
 }
 
 [node name="South" type="Position2D" parent="."]
-visible = false
-position = Vector2( 0, 70 )
+position = Vector2( 0, 50 )
 __meta__ = {
 "_editor_description_": ""
 }
 
 [node name="Weast" type="Position2D" parent="."]
-visible = false
-position = Vector2( -75, 6 )
+position = Vector2( -50, 4 )
 
 [node name="East" type="Position2D" parent="."]
-visible = false
-position = Vector2( 80, 8 )
+position = Vector2( 50, 6 )
 
 [node name="ShootTimer" type="Timer" parent="."]
 wait_time = 0.4
