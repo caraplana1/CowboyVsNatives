@@ -33,7 +33,7 @@ public class UserInterface : Control
 
         points = higherScore = 0;
 
-        isGameOver = isControlActive = true;
+        isGameOver = true;
     }
 
     public override void _UnhandledInput(InputEvent input)
@@ -41,9 +41,8 @@ public class UserInterface : Control
         // Enter buttom programed to play new game and quit controls page.
         if(input.IsActionReleased("ui_accept"))
         {
-            if(isControlActive)
+            if(controlsWindow.Visible)
             {
-                isControlActive = false;
 
                 controlsWindow.Visible = false;
                 newGameButton.Visible = true;
