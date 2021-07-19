@@ -6,11 +6,13 @@ public class UserInterface : Control
     #region Field Declaration
 
     // Children
+    private TextureRect logo;
     private Label textPoints;
     private TextureButton newGameButton;
     private Label textGameOver;
     private Label textHigherScore;
     private ColorRect controlsWindow;
+    private Timer reshowMenu;
 
     [Signal] delegate void ButtonNewGamePressed();
 
@@ -25,11 +27,13 @@ public class UserInterface : Control
 
     public override void _Ready()
     {
-        textPoints = GetChild<Label>(0);
-        newGameButton = GetChild<TextureButton>(1);
-        textGameOver = GetChild<Label>(2);
-        textHigherScore = GetChild<Label>(3);
-        controlsWindow = GetChild<ColorRect>(4);
+        logo = GetChild<TextureRect>(0);
+        textPoints = GetChild<Label>(1);
+        newGameButton = GetChild<TextureButton>(2);
+        textGameOver = GetChild<Label>(3);
+        textHigherScore = GetChild<Label>(4);
+        controlsWindow = GetChild<ColorRect>(5);
+        reshowMenu = GetChild<Timer>(6);
 
         points = higherScore = 0;
 
@@ -43,7 +47,7 @@ public class UserInterface : Control
         {
             if(controlsWindow.Visible)
             {
-
+                logo.Visible = true;
                 controlsWindow.Visible = false;
                 newGameButton.Visible = true;
                 GD.Print("Desactivando controles");
@@ -65,24 +69,33 @@ public class UserInterface : Control
     private void GameOver()
     {
         higherScore = points > higherScore ? points : higherScore;
+        reshowMenu.Start();
 
         textHigherScore.Text = "HS:" + higherScore.ToString();
-        newGameButton.GetChild<Label>(0).Text = "New Game";
-        textPoints.Visible = false;
-        newGameButton.Visible = textGameOver.Visible = isGameOver = true;
+        textHigherScore.Visible = textPoints.Visible = false;
+        textGameOver.Visible = isGameOver = true;
     }
 
     void OnNewGameButtonPressed()
     {
+        textHigherScore.Visible = higherScore > 0 ? true : false;
         points = 0;
         textPoints.Text = points.ToString();
         textPoints.Visible = true;
-        textHigherScore.Visible = higherScore > 0 ? true : false;
+
+        if(logo.Visible) logo.Visible = false;
         newGameButton.Visible = false;
         textGameOver.Visible = false;
+
         isGameOver = false;
 
         EmitSignal("ButtonNewGamePressed");
     }
-    
+
+    void ReshowMenu()
+    {
+        newGameButton.GetChild<Label>(0).Text = "New Game";
+        textGameOver.Visible = false;
+        if (isGameOver) logo.Visible = newGameButton.Visible = true;
+    }   
 }
