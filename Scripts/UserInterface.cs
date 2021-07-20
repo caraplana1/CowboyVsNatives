@@ -73,7 +73,7 @@ public class UserInterface : Control
 
         textHigherScore.Text = "HS:" + higherScore.ToString();
         textHigherScore.Visible = textPoints.Visible = false;
-        textGameOver.Visible = true;
+        isGameOver = textGameOver.Visible = true;
     }
 
     void OnNewGameButtonPressed()
@@ -96,6 +96,6 @@ public class UserInterface : Control
     {
         newGameButton.GetChild<Label>(0).Text = "New Game";
         textGameOver.Visible = false;
-        isGameOver = logo.Visible = newGameButton.Visible = true;
+        if (isGameOver) logo.Visible = newGameButton.Visible = true;
     }   
 }
